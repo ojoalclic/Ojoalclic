@@ -4,13 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ojo al Click | Tu guía digital</title>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;900&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@900&family=Orbitron:wght@400;900&family=Open+Sans:wght@400;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --fondo: #0a192f;
+            --fondo: #050a14;
             --cian: #00ffff;
             --fucsia: #ff00ff;
-            --blanco: #e6f1ff;
+            --amarillo: #fbff00;
+            --blanco: #ffffff;
         }
 
         body {
@@ -18,29 +19,7 @@
             color: var(--blanco);
             font-family: 'Open Sans', sans-serif;
             margin: 0;
-            overflow-x: hidden;
-        }
-
-        h1, h2, h3 {
-            font-family: 'Montserrat', sans-serif;
-            text-transform: uppercase;
-        }
-
-        /* --- EFECTO GLITCH PARA EL TEXTO --- */
-        .glitch {
-            position: relative;
-            color: var(--blanco);
-            font-size: 3rem;
-            letter-spacing: 3px;
-            text-shadow: 2px 2px var(--fucsia), -2px -2px var(--cian);
-            animation: glitch-anim 3s infinite;
-        }
-
-        @keyframes glitch-anim {
-            0% { text-shadow: 2px 2px var(--fucsia), -2px -2px var(--cian); }
-            25% { text-shadow: -2px 2px var(--cian), 2px -2px var(--fucsia); }
-            50% { text-shadow: 2px -2px var(--fucsia), -2px 2px var(--cian); }
-            100% { text-shadow: 2px 2px var(--fucsia), -2px -2px var(--cian); }
+            scroll-behavior: smooth;
         }
 
         /* --- NAVEGACIÓN --- */
@@ -48,148 +27,186 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 20px 5%;
-            background: rgba(10, 25, 47, 0.9);
+            padding: 15px 5%;
+            background: rgba(5, 10, 20, 0.95);
             position: sticky;
             top: 0;
-            z-index: 100;
-            border-bottom: 2px solid var(--cian);
+            z-index: 1000;
+            border-bottom: 3px solid var(--cian);
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.4);
         }
 
-        .nav-logo img {
-            height: 50px;
-        }
+        .nav-logo img { height: 60px; filter: drop-shadow(0 0 5px var(--cian)); }
 
-        nav a {
+        .nav-links a {
             color: var(--blanco);
             text-decoration: none;
-            margin-left: 20px;
-            font-weight: 600;
+            margin-left: 25px;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 900;
+            letter-spacing: 2px;
             transition: 0.3s;
+            text-transform: uppercase;
+            text-shadow: 0 0 5px var(--cian);
         }
 
-        nav a:hover {
-            color: var(--cian);
-            text-shadow: 0 0 10px var(--cian);
+        .nav-links a:hover {
+            color: var(--fucsia);
+            text-shadow: 0 0 15px var(--fucsia), 0 0 30px var(--fucsia);
+            transform: scale(1.1);
         }
 
-        /* --- HERO SECTION --- */
+        /* --- TÍTULOS DE SECCIÓN --- */
+        .section-title {
+            font-family: 'Montserrat', sans-serif;
+            font-size: clamp(2.5rem, 8vw, 4.5rem);
+            text-align: center;
+            margin-bottom: 40px;
+            color: var(--blanco);
+            text-shadow: 5px 5px var(--fucsia);
+            -webkit-text-stroke: 1.5px var(--cian);
+            letter-spacing: -2px;
+        }
+
+        /* --- HERO / INICIO --- */
         .hero {
-            height: 80vh;
+            height: 90vh;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
             text-align: center;
-            background: linear-gradient(rgba(10,25,47,0.7), rgba(10,25,47,0.7)), url('logo-ojo.jpg'); /* Fondo sutil con el ojo */
-            background-size: contain;
-            background-repeat: no-repeat;
-            background-position: center;
+            background: radial-gradient(circle, rgba(0,255,255,0.15) 0%, rgba(5,10,20,1) 75%);
         }
 
-        .btn-main {
-            background: transparent;
-            border: 2px solid var(--cian);
-            color: var(--cian);
-            padding: 15px 30px;
-            font-size: 1.2rem;
-            font-weight: bold;
-            cursor: pointer;
-            transition: 0.4s;
-            margin-top: 20px;
-            text-transform: uppercase;
-            box-shadow: 0 0 15px rgba(0, 255, 255, 0.3);
+        .hero-logo-ojo {
+            width: 280px;
+            max-width: 80%;
+            animation: float 4s ease-in-out infinite;
+            margin-bottom: 20px;
         }
 
-        .btn-main:hover {
-            background: var(--cian);
-            color: var(--fondo);
-            box-shadow: 0 0 30px var(--cian);
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg); filter: drop-shadow(0 0 15px var(--cian)); }
+            50% { transform: translateY(-25px) rotate(3deg); filter: drop-shadow(0 0 35px var(--fucsia)); }
         }
 
-        /* --- SECCIÓN POST --- */
-        .content-section {
-            padding: 50px 10%;
+        /* --- SECCIÓN ARTÍCULOS --- */
+        #articulos { padding: 100px 10%; background: #080f1d; }
+        .grid-articulos { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 40px; }
+        
+        .card-blog {
+            background: #0d1a30;
+            padding: 35px;
+            border-radius: 20px;
+            border: 3px solid var(--cian);
+            transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
         }
 
-        .card {
-            background: #112240;
-            border-left: 5px solid var(--fucsia);
-            padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-            transition: transform 0.3s;
+        .card-blog:hover {
+            border-color: var(--amarillo);
+            box-shadow: 0 0 40px rgba(251, 255, 0, 0.4);
+            transform: scale(1.05);
         }
 
-        .card:hover {
-            transform: translateY(-10px);
-        }
-
-        .card h2 {
-            color: var(--cian);
-        }
-
-        .emoji-span {
-            font-size: 1.5rem;
-        }
-
-        /* --- FOOTER --- */
-        footer {
+        /* --- SECCIÓN HIMNO --- */
+        #himno { 
+            padding: 120px 10%; 
+            background: linear-gradient(180deg, #080f1d 0%, #1a0a2e 100%);
             text-align: center;
-            padding: 40px;
-            border-top: 1px solid #233554;
-            font-size: 0.9rem;
-            color: #8892b0;
         }
+        
+        .audio-player {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 50px;
+            border-radius: 60px;
+            border: 3px solid var(--fucsia);
+            display: inline-block;
+            box-shadow: 0 0 25px rgba(255, 0, 255, 0.2);
+        }
+
+        audio { 
+            filter: invert(100%) hue-rotate(180deg) brightness(1.5); 
+            width: 320px; 
+            margin: 20px 0;
+        }
+
+        /* --- SECCIÓN RRSS --- */
+        #rrss { padding: 100px 10%; text-align: center; }
+        .social-btns { display: flex; justify-content: center; gap: 30px; flex-wrap: wrap; }
+        .btn-social {
+            padding: 25px 50px;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.4rem;
+            text-decoration: none;
+            color: var(--blanco);
+            border: 4px solid var(--blanco);
+            transition: 0.3s ease;
+            font-weight: 900;
+        }
+        .btn-tiktok:hover { background: #ff0050; border-color: #00f2ea; box-shadow: 8px 8px 0px #00f2ea; transform: translate(-4px, -4px); }
+        .btn-insta:hover { background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888); border-color: white; box-shadow: 0 0 20px rgba(255,255,255,0.5); }
+
     </style>
 </head>
 <body>
 
     <nav>
         <div class="nav-logo">
-            <img src="logo-texto.jpg" alt="Ojo al Click Logo">
+            <img src="logo-texto.jpg" alt="Ojo al Click">
         </div>
         <div class="nav-links">
-            <a href="#inicio">Inicio</a>
-            <a href="#iceberg">El Iceberg</a>
-            <a href="#himno">Himno</a>
+            <a href="#inicio">INICIO</a>
+            <a href="#articulos">ARTÍCULOS</a>
+            <a href="#himno">HIMNO</a>
             <a href="#rrss">RRSS</a>
         </div>
     </nav>
 
     <section class="hero" id="inicio">
-        <h1 class="glitch">OJO AL CLICK</h1>
-        <p style="font-size: 1.5rem; max-width: 600px;">Tu superpoder para conquistar la red sin quemarte. 🚀</p>
-        <button class="btn-main">¡Explorar la Red!</button>
+        <img src="logo-ojo.jpg" alt="Ojo Glitch" class="hero-logo-ojo">
+        <h1 class="section-title">OJO AL CLICK</h1>
+        <p style="font-size: 1.8rem; color: var(--cian); font-weight: bold; text-shadow: 0 0 10px var(--cian);">¡NAVEGA SIN QUEMARTE! 🔥</p>
     </section>
 
-    <section class="content-section" id="iceberg">
-        <div class="card">
-            <h2>🌐 EL ICEBERG DIGITAL: ¡BIENVENIDO A LA BESTIA! 🧊</h2>
-            <p>¿Crees que Internet existe desde siempre porque lleva toda "tu vida" ahí? <b>¡ERROR!</b> Es un "chaval" de apenas 30 años.</p>
-            <p>Antes, si querías saber algo, tenías que ir a una biblioteca y rezar para que el libro no tuviera las páginas pegadas... 📚</p>
+    <section id="articulos">
+        <h2 class="section-title">ARTÍCULOS TOP</h2>
+        <div class="grid-articulos">
+            <div class="card-blog">
+                <span style="color: var(--amarillo); font-family: 'Orbitron'; font-weight: 900;">[ MISIÓN 01 ]</span>
+                <h3 style="color: var(--cian); font-size: 1.8rem;">🌐 EL ICEBERG DIGITAL</h3>
+                <p style="font-size: 1.1rem; line-height: 1.6;">¿Crees que internet es solo TikTok? Descubre la bestia de cables y tiburones que hay bajo tus pies.</p>
+                <a href="#" style="color: var(--fucsia); text-decoration: none; font-weight: 900; font-size: 1.2rem;">LEER COMPLETO →</a>
+            </div>
+            </div>
+    </section>
+
+    <section id="himno">
+        <h2 class="section-title">NUESTRO HIMNO</h2>
+        <div class="audio-player">
+            <p style="margin-bottom: 25px; font-family: 'Orbitron'; font-size: 1.2rem; color: var(--cian);">🎵 SUBE EL VOLUMEN AL POP 🎵</p>
             
-            <h3 style="color: var(--fucsia);">🐀 1. El grito de la rata pisada</h3>
-            <p>¿Sabías que antes Internet sonaba como si le pisaras la cola a una rata? Era una sinfonía de pitidos que cortaba el teléfono de casa. ¡Si tu abuela llamaba, te quedabas sin conexión! 📞💥</p>
+            <audio controls>
+                <source src="https://github.com/ojoalclick/Ojoalclick/releases/download/himno/himno.mp3" type="audio/mpeg">
+                Tu navegador no soporta el audio.
+            </audio>
             
-            <h3 style="color: var(--fucsia);">🦈 2. ¡Tiburones contra cables!</h3>
-            <p>El 99% de Internet viaja por cables gigantes bajo el mar. ¡A los tiburones les encanta morderlos! 🦈 Hay barcos arreglando cables todo el día para que no te quedes sin tus vídeos.</p>
-            
-            <p><i>Continúa leyendo en el blog...</i></p>
+            <p style="margin-top: 25px; font-size: 0.9rem; opacity: 0.8; font-style: italic;">"Click, click, la red te espera..."</p>
         </div>
     </section>
 
-    <section id="himno" style="text-align: center; padding: 50px; background: #112240;">
-        <h2>🎧 NUESTRO HIMNO</h2>
-        <p>¡Dale al play y muévete suave por la red!</p>
-        <audio controls>
-            <source src="himno.mp3" type="audio/mpeg">
-            Tu navegador no soporta el audio.
-        </audio>
+    <section id="rrss">
+        <h2 class="section-title">SÍGUENOS</h2>
+        <div class="social-btns">
+            <a href="https://tiktok.com" target="_blank" class="btn-social btn-tiktok">TIKTOK</a>
+            <a href="https://instagram.com" target="_blank" class="btn-social btn-insta">INSTAGRAM</a>
+        </div>
     </section>
 
-    <footer>
-        <p>&copy; 2026 Ojo al Click - Educando a la generación del scroll 👁️🖱️</p>
+    <footer style="text-align: center; padding: 60px; opacity: 0.6; border-top: 1px solid rgba(255,255,255,0.1);">
+        <p>&copy; 2026 Ojo al Click - Educando a la generación del futuro 👁️🖱️</p>
     </footer>
 
 </body>
