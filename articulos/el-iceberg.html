@@ -6,24 +6,155 @@
     <title>El Iceberg Digital | Ojo al Click</title>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@900&family=Open+Sans:wght@400;700&display=swap" rel="stylesheet">
     <style>
-        :root { --fondo: #050a14; --cian: #00ffff; --fucsia: #ff00ff; --amarillo: #fbff00; --blanco: #ffffff; }
-        body { background-color: var(--fondo); color: var(--blanco); font-family: 'Open Sans', sans-serif; margin: 0; padding: 0; line-height: 1.8; }
-        .container { max-width: 850px; margin: 0 auto; padding: 60px 20px; }
+        /* VARIABLES Y BASE */
+        :root { 
+            --fondo: #050a14; 
+            --cian: #00ffff; 
+            --fucsia: #ff00ff; 
+            --amarillo: #fbff00; 
+            --blanco: #ffffff; 
+        }
         
-        h1 { font-family: 'Montserrat'; font-size: clamp(2rem, 5vw, 3.5rem); color: var(--cian); text-shadow: 4px 4px var(--fucsia); text-transform: uppercase; text-align: center; line-height: 1.1; margin-bottom: 40px; }
-        h2 { color: var(--fucsia); border-left: 5px solid var(--cian); padding-left: 15px; margin-top: 50px; font-family: 'Montserrat'; text-transform: uppercase; }
+        body { 
+            background-color: var(--fondo); 
+            color: var(--blanco); 
+            font-family: 'Open Sans', sans-serif; 
+            margin: 0; 
+            padding: 0; 
+            line-height: 1.8; 
+        }
+
+        .container { 
+            max-width: 850px; 
+            margin: 0 auto; 
+            padding: 60px 20px; 
+        }
+        
+        /* CABECERA Y TÍTULOS */
+        h1 { 
+            font-family: 'Montserrat'; 
+            font-size: clamp(2rem, 5vw, 3.5rem); 
+            color: var(--cian); 
+            text-shadow: 4px 4px var(--fucsia); 
+            text-transform: uppercase; 
+            text-align: center; 
+            line-height: 1.1; 
+            margin-bottom: 40px; 
+        }
+
+        h2 { 
+            color: var(--fucsia); 
+            border-left: 5px solid var(--cian); 
+            padding-left: 15px; 
+            margin-top: 50px; 
+            font-family: 'Montserrat'; 
+            text-transform: uppercase; 
+        }
+
         h3 { color: var(--amarillo); margin-top: 30px; font-size: 1.3rem; }
         
-        .destacado { background: rgba(0, 255, 255, 0.1); border: 1px solid var(--cian); padding: 20px; border-radius: 10px; font-size: 1.1rem; margin-bottom: 30px; }
-        .back-btn { display: inline-block; margin-bottom: 30px; color: var(--cian); text-decoration: none; font-weight: bold; font-family: 'Montserrat'; border: 1px solid var(--cian); padding: 10px 20px; border-radius: 5px; transition: 0.3s; }
+        /* COMPONENTES VISUALES */
+        .destacado { 
+            background: rgba(0, 255, 255, 0.1); 
+            border: 1px solid var(--cian); 
+            padding: 20px; 
+            border-radius: 10px; 
+            font-size: 1.1rem; 
+            margin-bottom: 30px; 
+        }
+
+        .back-btn { 
+            display: inline-block; 
+            margin-bottom: 30px; 
+            color: var(--cian); 
+            text-decoration: none; 
+            font-weight: bold; 
+            font-family: 'Montserrat'; 
+            border: 1px solid var(--cian); 
+            padding: 10px 20px; 
+            border-radius: 5px; 
+            transition: 0.3s; 
+        }
+
         .back-btn:hover { background: var(--cian); color: var(--fondo); }
         
-        .separador { height: 4px; background: linear-gradient(to right, transparent, var(--fucsia), var(--cian), transparent); margin: 50px 0; }
+        .separador { 
+            height: 4px; 
+            background: linear-gradient(to right, transparent, var(--fucsia), var(--cian), transparent); 
+            margin: 50px 0; 
+        }
+
         b { color: var(--cian); }
-        .quote { border-left: 4px solid var(--amarillo); padding-left: 20px; font-style: italic; margin: 30px 0; background: rgba(251, 255, 0, 0.05); padding: 20px; }
+
+        .quote { 
+            border-left: 4px solid var(--amarillo); 
+            padding-left: 20px; 
+            font-style: italic; 
+            margin: 30px 0; 
+            background: rgba(251, 255, 0, 0.05); 
+            padding: 20px; 
+        }
+
+        /* ESTILOS DEL MÓDEM FINAL */
+        #seccion-final {
+            text-align: center; 
+            padding: 30px; 
+            background: #111; 
+            border-radius: 15px; 
+            border: 3px solid var(--fucsia); 
+            box-shadow: 0 0 30px rgba(255, 0, 85, 0.3);
+            margin-top: 50px;
+        }
+
+        #modem-final {
+            width: 140px; 
+            height: 80px; 
+            background: #444; 
+            margin: 0 auto 20px; 
+            border-radius: 10px; 
+            border: 4px solid var(--cian); 
+            position: relative;
+        }
+
+        .led-final {
+            width: 8px; 
+            height: 8px; 
+            border-radius: 50%;
+        }
+
+        #btn-play {
+            background: var(--cian); 
+            color: #000; 
+            border: none; 
+            padding: 15px 30px; 
+            font-family: 'Montserrat'; 
+            font-weight: 900; 
+            border-radius: 5px; 
+            cursor: pointer; 
+            transition: 0.3s; 
+            box-shadow: 0 5px 0 #009988;
+        }
+
+        #btn-play:active {
+            transform: translateY(4px);
+            box-shadow: none;
+        }
+
+        /* ANIMACIONES */
+        @keyframes vibrarFinal {
+            0% { transform: translate(1px, 1px); }
+            50% { transform: translate(-2px, -1px); }
+            100% { transform: translate(1px, -2px); }
+        }
+
+        @keyframes blinkFinal {
+            0%, 100% { opacity: 1; filter: brightness(1.5); }
+            50% { opacity: 0.2; }
+        }
     </style>
 </head>
 <body>
+
     <div class="container">
         <a href="../index.html" class="back-btn">← VOLVER AL INICIO</a>
         
@@ -40,7 +171,7 @@
         
         <p>🔊 <b>La sinfonía del terror:</b> Para conectarse, el módem hacía unos ruidos que parecían una mezcla entre un fax poseído y <b>¡una rata a la que le han pisado la cola! 🐀</b> Chirridos y pitidos que te avisaban de que la magia (lenta) estaba empezando.</p>
 
-        <p>⌨️ <b>El primer mensaje fallido:</b> En 1969 intentaron enviar la palabra "LOGIN" entre dos ordenadores. El sistema se colgó y solo llegaron las dos primeras letras: <b>"LO"</b>. ¡El primer mensaje de la historia fue un error técnico! 😂</p>
+        <p>⌨> <b>El primer mensaje fallido:</b> En 1969 intentaron enviar la palabra "LOGIN" entre dos ordenadores. El sistema se colgó y solo llegaron las dos primeras letras: <b>"LO"</b>. ¡El primer mensaje de la historia fue un error técnico! 😂</p>
 
         <p>📧 <b>El rescate de la @:</b> ¿Sabías que la arroba casi ni se usaba? El inventor del email la eligió simplemente porque estaba ahí "muerta de risa" en el teclado y servía para separar el nombre del usuario de la máquina. ¡La salvó del olvido! 🧬</p>
 
@@ -71,10 +202,59 @@
             <b>💡 EL CONSEJO "OJO AL CLICK" 👁️🖱️</b><br>
             Internet es un superpoder increíble, pero recuerda: lo que tú ves en tu pantalla es solo la punta del iceberg. ¡Aprende a dominar la bestia y no dejes que el algoritmo te domine a ti! 🔥
         </div>
-        
+
+        <hr style="border: 1px dashed var(--cian); margin: 50px 0;">
+
+        <div id="seccion-final">
+            <h3 style="margin-top: 0;">🔊 EXPERIENCIA 1995: ¿CÓMO SONABA INTERNET?</h3>
+            <p style="color: white; font-family: 'Montserrat'; font-size: 0.9rem; margin-bottom: 30px;">Antes no había fibra óptica. Para entrar aquí, tu ordenador tenía que "gritar" por el teléfono. ¡Cuidado con los oídos!</p>
+
+            <div id="modem-final">
+                <div style="display: flex; justify-content: space-around; padding-top: 10px;">
+                    <div class="led-final" style="background: #ff0055;"></div>
+                    <div class="led-final" style="background: #00ffcc;"></div>
+                    <div class="led-final" style="background: #ffff00;"></div>
+                </div>
+                <div style="width: 30px; height: 4px; background: #222; margin: 25px auto 0; border-radius: 2px;"></div>
+            </div>
+
+            <button onclick="playModem()" id="btn-play">🔌 PULSA PARA CONECTAR</button>
+
+            <audio id="audio-final" src="../modem-sound.mp3"></audio>
+
+            <p id="txt-status" style="margin-top: 20px; font-family: 'Courier New'; color: #0f0; font-size: 0.8rem; height: 20px;"></p>
+        </div>
+
         <p style="text-align: center; margin-top: 60px;">
             <a href="../index.html" class="back-btn">VOLVER A LA PORTADA</a>
         </p>
     </div>
+
+    <script>
+        function playModem() {
+            const audio = document.getElementById('audio-final');
+            const modem = document.getElementById('modem-final');
+            const status = document.getElementById('txt-status');
+            const btn = document.getElementById('btn-play');
+            const leds = document.querySelectorAll('.led-final');
+
+            // Reproducir sonido
+            audio.play().catch(e => console.log("Error al reproducir: ", e));
+            
+            // Efectos visuales
+            btn.style.display = "none"; 
+            status.innerText = "> CARGANDO PROTOCOLO TCP/IP...";
+            modem.style.animation = "vibrarFinal 0.1s infinite";
+            leds.forEach(l => l.style.animation = "blinkFinal 0.2s infinite");
+
+            // Al terminar el audio
+            audio.onended = function() {
+                modem.style.animation = "none";
+                status.innerText = "> CONEXIÓN ESTABLECIDA. BIENVENIDO A LA RED.";
+                status.style.color = "var(--fucsia)";
+                leds.forEach(l => l.style.animation = "none");
+            };
+        }
+    </script>
 </body>
 </html>
