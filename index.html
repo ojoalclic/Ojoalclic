@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ojo al Click | Tu guía digital</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;900&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --fondo: #0a192f;
+            --cian: #00ffff;
+            --fucsia: #ff00ff;
+            --blanco: #e6f1ff;
+        }
+
+        body {
+            background-color: var(--fondo);
+            color: var(--blanco);
+            font-family: 'Open Sans', sans-serif;
+            margin: 0;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3 {
+            font-family: 'Montserrat', sans-serif;
+            text-transform: uppercase;
+        }
+
+        /* --- EFECTO GLITCH PARA EL TEXTO --- */
+        .glitch {
+            position: relative;
+            color: var(--blanco);
+            font-size: 3rem;
+            letter-spacing: 3px;
+            text-shadow: 2px 2px var(--fucsia), -2px -2px var(--cian);
+            animation: glitch-anim 3s infinite;
+        }
+
+        @keyframes glitch-anim {
+            0% { text-shadow: 2px 2px var(--fucsia), -2px -2px var(--cian); }
+            25% { text-shadow: -2px 2px var(--cian), 2px -2px var(--fucsia); }
+            50% { text-shadow: 2px -2px var(--fucsia), -2px 2px var(--cian); }
+            100% { text-shadow: 2px 2px var(--fucsia), -2px -2px var(--cian); }
+        }
+
+        /* --- NAVEGACIÓN --- */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 5%;
+            background: rgba(10, 25, 47, 0.9);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 2px solid var(--cian);
+        }
+
+        .nav-logo img {
+            height: 50px;
+        }
+
+        nav a {
+            color: var(--blanco);
+            text-decoration: none;
+            margin-left: 20px;
+            font-weight: 600;
+            transition: 0.3s;
+        }
+
+        nav a:hover {
+            color: var(--cian);
+            text-shadow: 0 0 10px var(--cian);
+        }
+
+        /* --- HERO SECTION --- */
+        .hero {
+            height: 80vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            background: linear-gradient(rgba(10,25,47,0.7), rgba(10,25,47,0.7)), url('logo-ojo.jpg'); /* Fondo sutil con el ojo */
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+        }
+
+        .btn-main {
+            background: transparent;
+            border: 2px solid var(--cian);
+            color: var(--cian);
+            padding: 15px 30px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.4s;
+            margin-top: 20px;
+            text-transform: uppercase;
+            box-shadow: 0 0 15px rgba(0, 255, 255, 0.3);
+        }
+
+        .btn-main:hover {
+            background: var(--cian);
+            color: var(--fondo);
+            box-shadow: 0 0 30px var(--cian);
+        }
+
+        /* --- SECCIÓN POST --- */
+        .content-section {
+            padding: 50px 10%;
+        }
+
+        .card {
+            background: #112240;
+            border-left: 5px solid var(--fucsia);
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            transition: transform 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+        }
+
+        .card h2 {
+            color: var(--cian);
+        }
+
+        .emoji-span {
+            font-size: 1.5rem;
+        }
+
+        /* --- FOOTER --- */
+        footer {
+            text-align: center;
+            padding: 40px;
+            border-top: 1px solid #233554;
+            font-size: 0.9rem;
+            color: #8892b0;
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="nav-logo">
+            <img src="logo-texto.jpg" alt="Ojo al Click Logo">
+        </div>
+        <div class="nav-links">
+            <a href="#inicio">Inicio</a>
+            <a href="#iceberg">El Iceberg</a>
+            <a href="#himno">Himno</a>
+            <a href="#rrss">RRSS</a>
+        </div>
+    </nav>
+
+    <section class="hero" id="inicio">
+        <h1 class="glitch">OJO AL CLICK</h1>
+        <p style="font-size: 1.5rem; max-width: 600px;">Tu superpoder para conquistar la red sin quemarte. 🚀</p>
+        <button class="btn-main">¡Explorar la Red!</button>
+    </section>
+
+    <section class="content-section" id="iceberg">
+        <div class="card">
+            <h2>🌐 EL ICEBERG DIGITAL: ¡BIENVENIDO A LA BESTIA! 🧊</h2>
+            <p>¿Crees que Internet existe desde siempre porque lleva toda "tu vida" ahí? <b>¡ERROR!</b> Es un "chaval" de apenas 30 años.</p>
+            <p>Antes, si querías saber algo, tenías que ir a una biblioteca y rezar para que el libro no tuviera las páginas pegadas... 📚</p>
+            
+            <h3 style="color: var(--fucsia);">🐀 1. El grito de la rata pisada</h3>
+            <p>¿Sabías que antes Internet sonaba como si le pisaras la cola a una rata? Era una sinfonía de pitidos que cortaba el teléfono de casa. ¡Si tu abuela llamaba, te quedabas sin conexión! 📞💥</p>
+            
+            <h3 style="color: var(--fucsia);">🦈 2. ¡Tiburones contra cables!</h3>
+            <p>El 99% de Internet viaja por cables gigantes bajo el mar. ¡A los tiburones les encanta morderlos! 🦈 Hay barcos arreglando cables todo el día para que no te quedes sin tus vídeos.</p>
+            
+            <p><i>Continúa leyendo en el blog...</i></p>
+        </div>
+    </section>
+
+    <section id="himno" style="text-align: center; padding: 50px; background: #112240;">
+        <h2>🎧 NUESTRO HIMNO</h2>
+        <p>¡Dale al play y muévete suave por la red!</p>
+        <audio controls>
+            <source src="himno.mp3" type="audio/mpeg">
+            Tu navegador no soporta el audio.
+        </audio>
+    </section>
+
+    <footer>
+        <p>&copy; 2026 Ojo al Click - Educando a la generación del scroll 👁️🖱️</p>
+    </footer>
+
+</body>
+</html>
