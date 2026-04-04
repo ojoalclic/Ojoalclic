@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manual del Superpoder | Ojo al Clic</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@900&family=Orbitron:wght@400;900&family=Open+Sans:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --fondo: #050a14;
+            --cian: #00ffff;
+            --fucsia: #ff00ff;
+            --amarillo: #fbff00;
+            --blanco: #ffffff;
+            --gris-retro: #c0c0c0;
+        }
+
+        body { background-color: var(--fondo); color: var(--blanco); font-family: 'Open Sans', sans-serif; margin: 0; line-height: 1.6; overflow-x: hidden; }
+        .container { padding: 20px 5%; max-width: 800px; margin: 0 auto; }
+        
+        h1 { font-family: 'Montserrat', sans-serif; font-size: clamp(1.8rem, 8vw, 3.5rem); color: var(--cian); text-shadow: 3px 3px var(--fucsia); text-align: center; line-height: 1.1; margin-bottom: 30px; }
+        h2 { font-family: 'Orbitron', sans-serif; color: var(--amarillo); margin-top: 40px; font-size: 1.2rem; display: flex; align-items: center; gap: 10px; }
+        
+        .card { background: rgba(255, 255, 255, 0.05); border-radius: 15px; padding: 20px; border: 1px solid rgba(0, 255, 255, 0.2); margin: 20px 0; }
+        .highlight { color: var(--fucsia); font-weight: bold; }
+
+        /* --- INTERACTIVO: EVOLUCIONADOR DE RED --- */
+        .evolution-box {
+            background: #111;
+            border: 2px solid var(--cian);
+            border-radius: 20px;
+            padding: 20px;
+            text-align: center;
+            margin: 40px 0;
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.1);
+        }
+
+        #web-screen {
+            background: var(--gris-retro);
+            color: black;
+            height: 200px;
+            margin: 20px auto;
+            border: 4px inset #eee;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            font-family: "Times New Roman", serif;
+            padding: 15px;
+            transition: all 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .btn-hack {
+            background: var(--fucsia);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            font-family: 'Orbitron';
+            font-weight: 900;
+            cursor: pointer;
+            border-radius: 50px;
+            box-shadow: 0 0 15px var(--fucsia);
+            text-transform: uppercase;
+            transition: 0.3s;
+        }
+
+        .btn-hack:active { transform: scale(0.9); }
+
+        /* --- ANIMACIÓN DE SEÑAL --- */
+        .speed-visual {
+            background: rgba(0,0,0,0.5);
+            height: 6px;
+            width: 100%;
+            position: relative;
+            margin: 20px 0;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        .data-packet {
+            width: 80px;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, var(--cian));
+            position: absolute;
+            animation: flow 0.6s infinite linear;
+        }
+        @keyframes flow {
+            from { left: -80px; }
+            to { left: 100%; }
+        }
+
+        footer { text-align: center; padding: 40px; opacity: 0.5; font-size: 0.8rem; }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <a href="../index.html" style="color: var(--cian); text-decoration: none; font-family: 'Orbitron'; font-weight: bold; font-size: 0.9rem;">← VOLVER AL HUB</a>
+
+        <h1>EL MANUAL DEL SUPERPODER ⚡</h1>
+
+        <div class="card">
+            <h2>🛡️ UN ORIGEN INDESTRUCTIBLE</h2>
+            <p>Internet no nació para que pudieras ver memes en clase. Nació en plena <strong>Guerra Fría</strong> como un proyecto militar llamado <strong>ARPANET</strong>. Se diseñó para ser una red indestructible: si una bomba destruía una ciudad entera, los datos simplemente "daban un rodeo" por otros cables. ¡Internet es la red que nunca muere!</p>
+        </div>
+
+        <div class="card">
+            <h2>🗿 LA WEB DE PIEDRA (1.0)</h2>
+            <p>Al principio, Internet era como un museo: <strong>mira pero no toques</strong>. Las páginas eran "estáticas", aburridas y sin colores. No había botones de like, ni podías comentar, ni mucho menos subir tus propios vídeos. ¡Era un monólogo donde tú solo podías leer!</p>
+        </div>
+
+        <div class="evolution-box">
+            <h3 style="font-family: 'Orbitron'; color: var(--amarillo); font-size: 1rem;">🕹️ MÁQUINA DEL TIEMPO WEB</h3>
+            <p style="font-size: 0.85rem; margin-bottom: 15px;">Pulsa para inyectar fibra óptica y redes sociales:</p>
+            
+            <div id="web-screen">
+                <p><strong>WWW.INTERNET-1991.COM</strong></p>
+                <p style="font-size: 0.9rem;">Bienvenido. Solo se permite leer texto plano. No hay interacción disponible.</p>
+                <p style="text-decoration: underline; color: blue; cursor: help;">[Leer archivo .txt]</p>
+            </div>
+
+            <button class="btn-hack" onclick="evolveWeb()">¡EVOLUCIONAR A WEB 3.0! 🚀</button>
+        </div>
+
+        <h2>🚀 VELOCIDAD DE TELETRANSPORTE</h2>
+        <p>Hoy, Internet es la fuente de información instantánea más grande que existe. Los datos viajan por cables de cristal a casi <span class="highlight">300.000 kilómetros por segundo</span>.</p>
+        
+        <div class="speed-visual"><div class="data-packet"></div></div>
+        
+        <p>Gracias a esta velocidad absurda, podemos ver en directo lo que ocurre a <strong>tropecientos mil kilómetros</strong> de distancia (como un partido en Japón o un cohete despegando en EE.UU.) como si estuviéramos allí.</p>
+
+        <div style="background: var(--fucsia); color: black; padding: 25px; border-radius: 20px; margin-top: 50px; text-align: center; border: 3px solid var(--blanco);">
+            <h2 style="color: black; margin-top: 0; justify-content: center;">🔥 TU SUPERPODER REAL</h2>
+            <p style="font-weight: 900; margin-bottom: 0;">Pasamos de ser espectadores a ser CREADORES. Tienes en tu bolsillo más información que todos los genios del pasado juntos. ¿Vas a usarlo solo para consumir o para inventar algo nuevo? <strong>¡Ojo al Clic!</strong></p>
+        </div>
+
+        <footer>
+            © 2026 Ojo al Clic - Misión 02: El Manual del Usuario
+        </footer>
+    </div>
+
+    <script>
+        function evolveWeb() {
+            const screen = document.getElementById('web-screen');
+            const btn = document.querySelector('.btn-hack');
+            
+            // Animación de transformación
+            screen.style.background = "linear-gradient(45deg, #0d1a30, #1a0a2e)";
+            screen.style.color = "var(--cian)";
+            screen.style.fontFamily = "'Orbitron', sans-serif";
+            screen.style.border = "4px solid var(--fucsia)";
+            screen.style.boxShadow = "inset 0 0 30px var(--fucsia), 0 0 20px var(--cian)";
+            
+            screen.innerHTML = `
+                <p style="color: var(--amarillo); font-size: 1.2rem; font-weight: 900; text-shadow: 0 0 5px var(--amarillo);">¡MODO CREADOR!</p>
+                <div style="display: flex; gap: 15px; margin-top: 10px;">
+                    <span style="font-size: 1.8rem;">❤️</span>
+                    <span style="font-size: 1.8rem;">⚡</span>
+                    <span style="font-size: 1.8rem;">🌍</span>
+                </div>
+                <p style="font-size: 0.75rem; margin-top: 10px; color: white;">Interactividad, vídeo 4K y conexión global activada.</p>
+            `;
+            
+            btn.innerText = "¡SISTEMA EVOLUCIONADO!";
+            btn.style.background = "var(--cian)";
+            btn.style.color = "black";
+            btn.style.boxShadow = "0 0 25px var(--cian)";
+        }
+    </script>
+</body>
+</html>
