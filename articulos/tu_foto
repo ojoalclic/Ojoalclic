@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>El Lado Oscuro de la Red | ojo al clic</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@900&family=Open+Sans:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root { 
+            --fondo: #050a14; 
+            --cian: #00ffff; 
+            --fucsia: #ff00ff; 
+            --amarillo: #fbff00; 
+            --blanco: #ffffff; 
+            --rojo: #ff3e3e;
+        }
+        
+        body { 
+            background-color: var(--fondo); 
+            color: var(--blanco); 
+            font-family: 'Open Sans', sans-serif; 
+            margin: 0; 
+            padding: 0; 
+            line-height: 1.8; 
+        }
+
+        .container { 
+            max-width: 850px; 
+            margin: 0 auto; 
+            padding: 60px 20px; 
+        }
+        
+        h1 { 
+            font-family: 'Montserrat'; 
+            font-size: clamp(2rem, 5vw, 3.5rem); 
+            color: var(--fucsia); 
+            text-shadow: 4px 4px var(--cian); 
+            text-transform: uppercase; 
+            text-align: center; 
+            line-height: 1.1; 
+            margin-bottom: 40px; 
+        }
+
+        h2 { 
+            color: var(--cian); 
+            border-left: 5px solid var(--fucsia); 
+            padding-left: 15px; 
+            margin-top: 50px; 
+            font-family: 'Montserrat'; 
+            text-transform: uppercase; 
+        }
+
+        .destacado-rojo { 
+            background: rgba(255, 62, 62, 0.1); 
+            border: 2px dashed var(--rojo); 
+            padding: 20px; 
+            border-radius: 10px; 
+            font-size: 1.1rem; 
+            margin-bottom: 30px; 
+        }
+
+        .separador { 
+            height: 4px; 
+            background: linear-gradient(to right, transparent, var(--cian), var(--fucsia), transparent); 
+            margin: 50px 0; 
+        }
+
+        b { color: var(--amarillo); }
+
+        /* ESTILOS DE LA MÁQUINA DE MANIPULACIÓN */
+        #contenedor-multimedia {
+            background: #1a1a1a;
+            border: 4px solid var(--cian);
+            border-radius: 20px;
+            padding: 30px;
+            text-align: center;
+            margin-top: 50px;
+            box-shadow: 0 0 20px var(--cian);
+        }
+
+        .pantalla-fake {
+            background: #000;
+            width: 100%;
+            height: 200px;
+            margin-bottom: 20px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            position: relative;
+            border: 2px solid #333;
+        }
+
+        #img-avatar {
+            width: 100px;
+            filter: grayscale(100%);
+            transition: 0.5s;
+        }
+
+        .controles-glitch {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+        }
+
+        .btn-accion {
+            background: #222;
+            color: var(--cian);
+            border: 1px solid var(--cian);
+            padding: 10px;
+            font-family: 'Montserrat';
+            cursor: pointer;
+            font-size: 0.8rem;
+        }
+
+        .btn-accion:hover {
+            background: var(--cian);
+            color: #000;
+        }
+
+        /* ANIMACIONES */
+        @keyframes scanline {
+            0% { transform: translateY(-100%); }
+            100% { transform: translateY(100%); }
+        }
+
+        .scanline {
+            position: absolute;
+            width: 100%;
+            height: 2px;
+            background: var(--fucsia);
+            opacity: 0.5;
+            animation: scanline 2s linear infinite;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <a href="../index.html" class="back-btn" style="color: var(--cian); text-decoration: none; border: 1px solid var(--cian); padding: 5px 15px; border-radius: 5px; font-family: 'Montserrat';">← VOLVER</a>
+        
+        <h1>⚠️ PELIGRO: <br>TU FOTO YA NO ES TUYA 🔓</h1>
+        
+        <div class="destacado-rojo">
+            Imagina que dejas una copia de las llaves de tu casa pegada en una farola de la calle. Eso es, básicamente, subir una foto sin control a la red. No solo se queda ahí para siempre, sino que <b>cualquier persona en el mundo</b> puede cogerla y usarla para lo que quiera.
+        </div>
+
+        <h2>🕵️ 1. EL "MERCADILLO" DE TUS DATOS</h2>
+        <p>Hay gente que se dedica a coleccionar fotos ajenas para fines que no te gustarían nada:</p>
+        
+        <p>👤 <b>Suplantación de identidad:</b> Alguien en la otra punta del mundo puede usar tu cara para crear un perfil falso en Instagram o TikTok y engañar a otras personas. ¡Están viviendo una vida falsa usando tus fotos!</p>
+        
+        <p>🌍 <b>Acceso Global:</b> No importa si vives en un pueblo pequeño; una vez que la foto está en la red, un usuario en Japón, Brasil o Rusia puede descargarla en un segundo. <b>Internet no tiene fronteras.</b></p>
+
+        <div class="separador"></div>
+
+        <h2>🎭 2. MANIPULACIÓN: EL "PHOTOSHOP" MALVADO</h2>
+        <p>Hoy en día, con la Inteligencia Artificial y las herramientas de edición, tu foto es como una pieza de plastilina:</p>
+
+        <p>🖼️ <b>Deepfakes y Montajes:</b> Pueden recortar tu cara y ponerla en situaciones ridículas, peligrosas o ilegales. Lo que empezó como una foto inocente puede acabar convertida en un "meme" ofensivo o algo mucho peor.</p>
+
+        <p>📱 <b>Uso Ilícito:</b> Tus fotos pueden terminar en anuncios de productos que tú no usas, o incluso en páginas web de dudosa reputación. Una vez que la imagen "vuela", ya no puedes pedir que te la devuelvan.</p>
+
+        <div class="quote" style="border-left: 4px solid var(--rojo); background: rgba(255,0,0,0.05);">
+            <b>🚨 ¡OJO AL DATO!</b><br>
+            Compartir una foto privada de otra persona sin su permiso es un <b>DELITO</b>. No solo es que la imagen no desaparezca, es que las consecuencias legales también pueden acompañarte de por vida.
+        </div>
+
+        <div id="contenedor-multimedia">
+            <h3 style="color: var(--cian); margin-top: 0;">🛠️ SIMULADOR DE MANIPULACIÓN</h3>
+            <p style="font-size: 0.9rem; color: #ccc;">Mira lo que puede pasarle a una imagen en manos equivocadas en solo 3 clics:</p>
+            
+            <div class="pantalla-fake">
+                <div class="scanline"></div>
+                <img id="img-avatar" src="https://cdn-icons-png.flaticon.com/512/924/924874.png" alt="Avatar">
+                <p id="msg-alerta" style="position: absolute; bottom: 10px; color: var(--fucsia); font-family: 'Courier New'; font-weight: bold; font-size: 0.7rem;"></p>
+            </div>
+
+            <div class="controles-glitch">
+                <button class="btn-accion" onclick="manipular('pixel')">👾 PIXELAR / ANONIMIZAR</button>
+                <button class="btn-accion" onclick="manipular('clonar')">👥 CLONAR IDENTIDAD</button>
+                <button class="btn-accion" onclick="manipular('fake')">🎭 CAMBIAR CONTEXTO</button>
+                <button class="btn-accion" onclick="manipular('leak')">🌐 SIMULAR DIFUSIÓN</button>
+            </div>
+            
+            <p id="txt-log" style="margin-top: 15px; font-family: 'Courier New'; color: #0f0; font-size: 0.8rem;">Esperando comandos...</p>
+        </div>
+
+        <p style="text-align: center; margin-top: 60px;">
+            <a href="../index.html" class="back-btn" style="color: var(--fucsia); text-decoration: none; border: 1px solid var(--fucsia); padding: 10px 20px; border-radius: 5px; font-family: 'Montserrat'; font-weight: bold;">VOLVER A LA PORTADA</a>
+        </p>
+    </div>
+
+    <script>
+        function manipular(tipo) {
+            const img = document.getElementById('img-avatar');
+            const log = document.getElementById('txt-log');
+            const alerta = document.getElementById('msg-alerta');
+            
+            if(tipo === 'pixel') {
+                img.style.filter = "blur(10px) contrast(200%)";
+                log.innerText = "> Extrayendo rasgos faciales...";
+            } else if(tipo === 'clonar') {
+                img.style.transform = "scaleX(-1)";
+                img.style.filter = "sepia(100%) hue-rotate(90deg)";
+                log.innerText = "> Creando 50 perfiles falsos en redes sociales...";
+            } else if(tipo === 'fake') {
+                img.style.filter = "invert(100%)";
+                log.innerText = "> Insertando rostro en video no autorizado...";
+            } else if(tipo === 'leak') {
+                img.style.animation = "vibrarFinal 0.1s infinite";
+                log.innerText = "> COMPARTIENDO EN 1.200 SERVIDORES EXTERNOS...";
+                alerta.innerText = "¡AVISO: IMAGEN FUERA DE CONTROL!";
+                setTimeout(() => { img.style.animation = "none"; }, 1000);
+            }
+        }
+    </script>
+</body>
+</html>
