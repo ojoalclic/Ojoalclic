@@ -201,8 +201,63 @@
                 text-shadow: 3px 3px var(--fucsia);
                 -webkit-text-stroke: 1px var(--cian);
             }
-        }
+     /* =========================================
+   BAILARÍN DE CÓDIGO (CSS PURO)
+   ========================================= */
 
+/* Contenedor del ecualizador/bailarín */
+.dj-dancer {
+    display: none; /* Oculto por defecto */
+    justify-content: center;
+    align-items: flex-end; /* Las barras crecen hacia arriba */
+    width: 100px;
+    height: 60px;
+    margin: 20px auto;
+    gap: 5px; /* Espacio entre barras */
+    transition: opacity 0.4s ease; /* Aparición suave */
+    opacity: 0;
+}
+
+/* Estilo base para cada barra */
+.dj-bar {
+    width: 12px;
+    height: 10px; /* Altura mínima */
+    background: var(--cian); /* Tu color cian neón */
+    border-radius: 3px;
+    box-shadow: 0 0 10px var(--cian); /* Brillo neón cian */
+    animation: dance 1s infinite alternate ease-in-out; /* Animación base */
+    animation-play-state: paused; /* Pausada por defecto */
+}
+
+/* Colores alternos para darle vibra Retro-Party */
+.dj-bar:nth-child(even) {
+    background: var(--fucsia); /* Tu color fucsia neón */
+    box-shadow: 0 0 10px var(--fucsia); /* Brillo neón fucsia */
+}
+
+/* Tiempos de animación diferentes para que parezca que baila */
+.dj-bar:nth-child(1) { animation-delay: 0.1s; }
+.dj-bar:nth-child(2) { animation-delay: 0.3s; }
+.dj-bar:nth-child(3) { animation-delay: 0.6s; }
+.dj-bar:nth-child(4) { animation-delay: 0.2s; }
+.dj-bar:nth-child(5) { animation-delay: 0.5s; }
+
+/* Definición de la animación del baile (crecimiento) */
+@keyframes dance {
+    0% {
+        height: 10px;
+        transform: translateY(0);
+    }
+    50% {
+        height: 50px; /* Altura máxima */
+        transform: translateY(-5px); /* Pequeño salto */
+    }
+    100% {
+        height: 15px;
+        transform: translateY(0);
+    }
+}
+/* ========================================= */
     </style>
 </head>
 <body>
@@ -280,18 +335,74 @@
             <p style="font-style: italic; opacity: 0.8;">"Imprímelas, pégalas en tu cuarto o compártelas en tus historias. La información es poder, ¡pásalo!" 👁️🖱️</p>
         </div>
     </section>
-    <section id="himno">
-        <h2 class="section-title">NUESTRO HIMNO</h2>
-        <div class="audio-player">
-            <p style="margin-bottom: 25px; font-family: 'Orbitron'; font-size: 1.2rem; color: var(--cian);">🎵 SUBE EL VOLUMEN AL POP 🎵</p>
-            
-            <audio controls>
-                <source src="https://github.com/ojoalclic/Ojoalclic/releases/download/himno/himno.mp3" type="audio/mpeg">
-                Tu navegador no soporta el audio.
-            </audio>
-            
-            <p style="margin-top: 25px; font-size: 0.9rem; opacity: 0.8; font-style: italic;">"Click, click, la red te espera..."</p>
+   <section id="himno">
+    <h2 class="section-title">NUESTRO HIMNO</h2>
+    
+    <div class="audio-player" style="position: relative;">
+        
+        <p style="margin-bottom: 25px; font-family: 'Orbitron'; font-size: 1.2rem; color: var(--cian); text-shadow: 0 0 5px var(--cian);">🎵 SUBE EL VOLUMEN AL POP 🎵</p>
+        
+        <div id="code-dancer" class="dj-dancer">
+            <div class="dj-bar"></div>
+            <div class="dj-bar"></div>
+            <div class="dj-bar"></div>
+            <div class="dj-bar"></div>
+            <div class="dj-bar"></div>
         </div>
+        <audio controls id="himno-audio">
+            <source src="https://github.com/ojoalclic/Ojoalclic/releases/download/himno/himno.mp3" type="audio/mpeg">
+            Tu navegador no soporta el audio.
+        </audio>
+        
+        <p style="margin-top: 25px; font-size: 0.9rem; opacity: 0.8; font-style: italic; color: var(--blanco);">"Click, click, la red te espera..."</p>
+    </div>
+
+    <script>
+        const audioHimno = document.getElementById('himno-audio');
+        const dancerContainer = document.getElementById('code-dancer');
+        // Seleccionamos todas las barras individuales
+        const bars = document.querySelectorAll('.dj-bar');
+
+        // Función para activar el baile
+        function activarBaile() {
+            // 1. Mostramos el contenedor
+            dancerContainer.style.display = 'flex';
+            setTimeout(() => { dancerContainer.style.opacity = '1'; }, 10);
+            
+            // 2. Activamos la animación de cada barra (animation-play-state)
+            bars.forEach(bar => {
+                bar.style.animationPlayState = 'running';
+            });
+        }
+
+        // Función para desactivar el baile
+        function desactivarBaile() {
+            // 1. Ocultamos el contenedor suavemente
+            dancerContainer.style.opacity = '0';
+            setTimeout(() => { dancerContainer.style.display = 'none'; }, 400);
+            
+            // 2. Pausamos la animación para ahorrar recursos
+            bars.forEach(bar => {
+                bar.style.animationPlayState = 'paused';
+            });
+        }
+
+        // EVENTOS DEL REPRODUCTOR
+        audioHimno.addEventListener('play', () => {
+            console.log("PLAY detectado - El código empieza a bailar 👾");
+            activarBaile();
+        });
+
+        audioHimno.addEventListener('pause', () => {
+            console.log("PAUSE detectado - Parando el baile 🛑");
+            desactivarBaile();
+        });
+
+        audioHimno.addEventListener('ended', () => {
+            console.log("ENDED detectado - Fin de la fiesta 🛑");
+            desactivarBaile();
+        });
+    </script>
     </section>
 
     <section id="rrss">
