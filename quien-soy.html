@@ -4,68 +4,105 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Quién Soy - Ojo al Clic</title>
-    <link rel="stylesheet" href="style.css"> <style>
-        .form-container {
-            max-width: 800px;
-            margin: 50px auto;
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .form-content {
             padding: 20px;
-            background: #f9f9f9;
-            border-radius: 8px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            text-align: left;
         }
+        .form-content h3 {
+            margin-top: 25px;
+            color: #0056b3; /* Tu color azul */
+        }
+        .form-content ul {
+            margin-left: 20px;
+            margin-bottom: 20px;
+        }
+        .form-content li {
+            margin-bottom: 10px;
+        }
+        .boton-contacto-container {
+            text-align: center;
+            margin-top: 30px;
+            margin-bottom: 30px;
+        }
+        /* Botón estilo Ojo al Clic */
         .btn-google {
             display: inline-block;
-            background-color: #0056b3;
-            color: white;
-            padding: 12px 25px;
+            background-color: #0056b3; /* Tu azul */
+            color: white !important;
+            padding: 15px 30px;
             text-decoration: none;
             border-radius: 5px;
             font-weight: bold;
-            margin-top: 20px;
+            transition: background-color 0.3s;
+            border: none;
+            font-size: 1.1em;
+            cursor: pointer;
         }
         .btn-google:hover {
-            background-color: #003d7a;
+            background-color: #004494; /* Un azul un poco más oscuro al pasar el ratón */
+            text-decoration: none;
         }
-        .privacidad-nota {
-            font-size: 0.85em;
+        .nota-privacidad-corta {
+            font-size: 0.9em;
             color: #666;
-            margin-top: 30px;
-            border-top: 1px solid #ddd;
-            padding-top: 10px;
+            margin-top: 20px;
+            text-align: center;
+            padding: 10px;
+            background-color: #f9f9f9;
+            border-radius: 5px;
         }
     </style>
 </head>
 <body>
 
-    <header>
-        <h1>Ojo al Clic</h1>
-        <nav>
-            <a href="index.html">Inicio</a>
-        </nav>
-    </header>
+<header>
+    <h1>Ojo al Clic</h1>
+    <nav>
+        <a href="index.html">Inicio</a>
+        <a href="index.html#articulos">Artículos</a>
+        <a href="index.html#consejos">Consejos</a>
+        <a href="index.html#recursos">Recursos</a>
+        <a href="quien-soy.html" class="active">Quién Soy / Formación</a>
+    </nav>
+</header>
 
-    <main class="form-container">
-        <section>
+<main class="container">
+    <section class="card">
+        <div class="form-content">
             <h2>Sobre mí y Formación</h2>
-            <p>¡Hola! Soy Susana la responsable detrás de <strong>Ojo al Clic</strong>. Mi misión es acercar la tecnología a todas las personas, eliminando barreras y fomentando un uso seguro y crítico de la red.</p>
             
-            <p>Ofrezco charlas y talleres especializados en:</p>
+            <p>¡Hola! Soy el responsable detrás de <strong>Ojo al Clic</strong>. Mi misión es acercar la tecnología a todas las personas, eliminando barreras y fomentando un uso seguro, crítico y responsable de la red.</p>
+            
+            <p>Creo firmemente en la necesidad de una alfabetización digital real para evitar la exclusión y los riesgos innecesarios en internet.</p>
+
+            <h3>Charlas y Talleres</h3>
+            <p>Ofrezco formaciones personalizadas para asociaciones, centros educativos, centros de mayores o empresas. Mis áreas de especialización son:</p>
             <ul>
-                <li><strong>Alfabetización Digital:</strong> Aprende a navegar sin miedo.</li>
-                <li><strong>Seguridad en Internet:</strong> Protege tus datos y los de tu familia.</li>
-                <li><strong>Uso crítico de la información:</strong> No te dejes engañar por las fake news.</li>
+                <li><strong>Alfabetización Digital Básica:</strong> Pierde el miedo al ordenador y al móvil.</li>
+                <li><strong>Seguridad y Privacidad en Internet:</strong> Protege tus datos, gestiona contraseñas y evita estafas (phishing, etc.).</li>
+                <li><strong>Uso Crítico de la Información:</strong> Cómo identificar noticias falsas (fake news) y navegar de forma segura.</li>
+                <li><strong>Identidad Digital y Redes Sociales:</strong> Gestión responsable de la imagen online.</li>
             </ul>
 
-            <h3>¿Hablamos?</h3>
-            <p>Si formas parte de una asociación, centro educativo o empresa y te interesa una formación personalizada, puedes solicitar información a través del siguiente enlace:</p>
+            <h3>¿Te interesa organizar una formación?</h3>
+            <p>Si quieres información sobre disponibilidad, temas específicos o presupuestos, por favor, utiliza el formulario oficial de contacto alojado en Google Forms. Estaré encantado de atender tu propuesta.</p>
             
-            <a href="AQUÍ_VA_TU_LINK_DE_GOOGLE_FORMS" target="_blank" class="btn-google">Acceder al Formulario de Contacto</a>
-        </section>
+            <div class="boton-contacto-container">
+                <a href="AQUÍ_VA_TU_LINK_DE_GOOGLE_FORMS" target="_blank" class="btn-google">Acceder al Formulario de Contacto</a>
+            </div>
 
-        <footer class="privacidad-nota">
-            <p><strong>Aviso de Privacidad:</strong> Los datos recogidos en el formulario de Google son meramente informativos. Su única finalidad es resolver dudas o gestionar la consulta sobre servicios de charlas y formación. No se utilizarán para fines publicitarios ni se cederán a terceros. <a href="privacidad.html">Leer términos completos aquí.</a></p>
-        </footer>
-    </main>
+            <div class="nota-privacidad-corta">
+                <p>Aviso: Los datos recogidos en el formulario son meramente informativos para resolver dudas o consultar sobre servicios. <a href="privacidad.html">Ver Política de Privacidad</a>.</p>
+            </div>
+        </div>
+    </section>
+</main>
+
+<footer>
+    <p>&copy; 2026 Ojo al Clic - Alfabetización y Seguridad Digital</p>
+</footer>
 
 </body>
 </html>
