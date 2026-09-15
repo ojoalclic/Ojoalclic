@@ -65,7 +65,7 @@
         <p id="descripcion">
             ¡El Algoritmo te bombardea con RRSS!<br><br>
             Atrapa <b>VIDA REAL (📚🎨⚽😴)</b> para desinflar tu mente (+10%)<br>
-            Esquiva <b>MÓVILES CON RRSS (📱 TikTok, Insta, YT)</b> o tu cerebro se hinchará (-25%)
+            Esquiva <b>MÓVILES RRSS (TikTok, Insta, YT...)</b> o tu cerebro se hinchará (-25%)
         </p>
         <button onclick="iniciarJuegoCompleto()">¡SALVAR MI CEREBRO!</button>
     </div>
@@ -84,16 +84,16 @@ canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 
 let score = 0, atencion = 100, gameRunning = false, items = [], timeInterval;
-let player = { x: canvas.width / 2, y: canvas.height - 120, baseSize: 50, size: 50 };
+let player = { x: canvas.width / 2, y: canvas.height - 130, baseSize: 50, size: 50 };
 
-// Lista de móviles con redes sociales
+// Tarjetas estilizadas de móviles con las marcas de redes sociales
 const rrssMobiles = [
-    { text: '📱TikTok', color: '#ff0050' },
-    { text: '📱Insta', color: '#e1306c' },
-    { text: '📱YouTube', color: '#ff0000' },
-    { text: '📱X', color: '#ffffff' },
-    { text: '📱Twitch', color: '#9146ff' },
-    { text: '📱Snap', color: '#fffc00' }
+    { name: 'TikTok', bg: '#fe2c55', textCol: '#ffffff' },
+    { name: 'Insta', bg: '#e1306c', textCol: '#ffffff' },
+    { name: 'YouTube', bg: '#ff0000', textCol: '#ffffff' },
+    { name: 'X / Twitter', bg: '#1da1f2', textCol: '#ffffff' },
+    { name: 'Twitch', bg: '#9146ff', textCol: '#ffffff' },
+    { name: 'Snap', bg: '#fffc00', textCol: '#000000' }
 ];
 
 const vidaReal = ['📚', '🎨', '⚽', '😴', '🎸', '🌱'];
@@ -132,7 +132,7 @@ function soundGameOver() {
     setTimeout(() => playSound(90, 0.5, 'triangle', 0.2), 400);
 }
 
-// Controles
+// Controles táctiles y ratón
 window.addEventListener('mousemove', (e) => { player.x = e.clientX - player.size/2; });
 window.addEventListener('touchmove', (e) => { 
     player.x = e.touches[0].clientX - player.size/2;
@@ -167,8 +167,8 @@ function actualizarUI() {
     attentionText.innerText = Math.round(atencion) + "%";
     atencionBar.style.width = atencion + "%";
 
-    // EFECTO DE HINCHAZÓN: Cuanta menos salud mental (atención), más grande e hinchado está el cerebro
-    let hinchazon = (100 - atencion) * 0.9; 
+    // Hinchazón progresiva del cerebro al perder atención
+    let hinchazon = (100 - atencion) * 0.95; 
     player.size = player.baseSize + hinchazon;
 
     if(atencion > 60) {
@@ -186,25 +186,35 @@ function spawnItem() {
 
     if (isBad) {
         data = rrssMobiles[Math.floor(Math.random() * rrssMobiles.length)];
+        items.push({
+            x: Math.random() * (canvas.width - 110),
+            y: -70,
+            w: 100,
+            h: 55,
+            speed: 4 + (score / 15),
+            name: data.name,
+            bg: data.bg,
+            textCol: data.textCol,
+            isBad: true
+        });
     } else {
-        data = { text: vidaReal[Math.floor(Math.random() * vidaReal.length)], color: '#00ff66' };
+        items.push({
+            x: Math.random() * (canvas.width - 50),
+            y: -50,
+            w: 45,
+            h: 45,
+            speed: 4 + (score / 15),
+            emoji: vidaReal[Math.floor(Math.random() * vidaReal.length)],
+            isBad: false
+        });
     }
-
-    items.push({
-        x: Math.random() * (canvas.width - 80),
-        y: -50,
-        speed: 4 + (score / 15),
-        text: data.text,
-        color: data.color,
-        isBad: isBad
-    });
 }
 
 function animate() {
     if (!gameRunning) return;
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-    // Dibujar Jugador (Cerebro con tamaño dinámico)
+    // Dibujar Jugador (Cerebro)
     ctx.font = `${player.size}px Arial`;
     ctx.fillText('🧠', player.x, player.y + player.size/2);
 
@@ -212,20 +222,33 @@ function animate() {
 
     items.forEach((item, index) => {
         item.y += item.speed;
-        
-        // Renderizar item con estilo
+
         if (item.isBad) {
-            ctx.font = 'bold 22px Orbitron, sans-serif';
-            ctx.fillStyle = item.color;
-            ctx.fillText(item.text, item.x, item.y);
+            // Dibujar móvil retro con la marca de la red social
+            ctx.fillStyle = "#ffffff";
+            ctx.beginPath();
+            ctx.roundRect(item.x - 3, item.y - 3, item.w + 6, item.h + 6, 10);
+            ctx.fill();
+
+            ctx.fillStyle = item.bg;
+            ctx.beginPath();
+            ctx.roundRect(item.x, item.y, item.w, item.h, 8);
+            ctx.fill();
+
+            ctx.fillStyle = item.textCol;
+            ctx.font = '900 13px Orbitron, sans-serif';
+            ctx.textAlign = 'center';
+            ctx.fillText(item.name, item.x + item.w / 2, item.y + item.h / 2 + 5);
+            ctx.textAlign = 'left'; // Reset alignment
         } else {
-            ctx.font = '40px Arial';
-            ctx.fillText(item.text, item.x, item.y);
+            // Dibujar icono de Vida Real
+            ctx.font = '45px Arial';
+            ctx.fillText(item.emoji, item.x, item.y + 40);
         }
 
-        // Detección de colisiones ajustada al tamaño del cerebro hinchado
-        if (item.y > player.y - 20 && item.y < player.y + player.size &&
-            item.x > player.x - 30 && item.x < player.x + player.size) {
+        // Colisión precisa con el cerebro
+        if (item.y + item.h > player.y && item.y < player.y + player.size &&
+            item.x + item.w > player.x && item.x < player.x + player.size) {
             
             if (item.isBad) {
                 atencion -= 25;
@@ -250,7 +273,7 @@ function animate() {
         soundGameOver();
         
         pantalla.style.display = 'block';
-        document.getElementById('titulo').innerText = "💥 ¡CEREBROEXPLOTADO!";
+        document.getElementById('titulo').innerText = "💥 ¡CEREBRO EXPLOTADO!";
         document.getElementById('titulo').style.color = "var(--rojo)";
         document.getElementById('descripcion').innerHTML = `
             Las redes han hinchado tu mente hasta colapsar.<br><br>
