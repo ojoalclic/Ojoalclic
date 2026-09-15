@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Misión 06: Escape del Algoritmo | ojo al clic</title>
+    <title>Misión 06: Brain-Man vs Algoritmo | ojo al clic</title>
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;900&display=swap" rel="stylesheet">
     <style>
         :root { --fondo: #050a14; --cian: #00ffff; --fucsia: #ff00ff; --amarillo: #fbff00; --rojo: #ff3e3e; --verde: #00ff66; }
@@ -29,6 +29,17 @@
             transition: width 0.2s ease;
         }
 
+        #powerup-notice {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 1.2rem;
+            color: var(--amarillo);
+            font-weight: 900;
+            display: none;
+            text-shadow: 0 0 10px var(--amarillo);
+        }
+
         #pantalla-info {
             position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
             text-align: center; background: rgba(5,10,20,0.95); padding: 35px;
@@ -46,6 +57,7 @@
             position: absolute; bottom: 20px; right: 20px;
             color: var(--cian); text-decoration: none; font-size: 0.8rem;
             border: 1px solid var(--cian); padding: 8px 15px; z-index: 50;
+            background: rgba(5, 10, 20, 0.8); border-radius: 3px;
         }
     </style>
 </head>
@@ -54,20 +66,24 @@
 <div id="game-container">
     <canvas id="gameCanvas"></canvas>
     <div id="ui">
-        <div class="stat">TIEMPO REAL ENFOQUE: <span id="score" style="color:var(--amarillo);">0s</span></div>
-        <div class="stat">SALUD MENTAL: <span id="attention-text" style="color:var(--verde);">100%</span></div>
+        <div class="stat">TIEMPO SOBREVIVIDO: <span id="score" style="color:var(--amarillo);">0s</span></div>
+        <div class="stat">ENERGÍA MENTAL: <span id="attention-text" style="color:var(--verde);">100%</span></div>
         <div id="bar-container">
             <div id="atencion-bar"></div>
         </div>
     </div>
+
+    <div id="powerup-notice">⚡ MENTE CLARA: ¡CÓMETELOS! ⚡</div>
+
     <div id="pantalla-info">
         <h1 id="titulo" style="color:var(--amarillo); margin-top:0;">MISIÓN 06</h1>
         <p id="descripcion">
-            ¡El Algoritmo te bombardea con RRSS!<br><br>
-            Atrapa <b>VIDA REAL (📚🎨⚽😴)</b> para desinflar tu mente (+10%)<br>
-            Esquiva <b>MÓVILES RRSS (TikTok, Insta, YT...)</b> o tu cerebro se hinchará (-25%)
+            ¡Las RRSS son comecocos devora-cerebros!<br><br>
+            👻 <b>Esquiva los algoritmos</b> para no perder energía.<br>
+            ⚡ <b>Atrapa DESCANSO (😴), NATURALEZA (🌿), DEPORTE (⚽) o LIBROS (📚)</b> para activar el modo <b>PAC-MAN INVENCIBLE</b>.<br>
+            ¡Cuando brilles en dorado, <b>CÓMETELOS TÚ A ELLOS</b>!
         </p>
-        <button onclick="iniciarJuegoCompleto()">¡SALVAR MI CEREBRO!</button>
+        <button onclick="iniciarJuegoCompleto()">¡ACTIVAR MI CEREBRO!</button>
     </div>
     <a href="../recreativo.html" class="salir-btn">SALIR AL RECREATIVO</a>
 </div>
@@ -79,74 +95,62 @@ const scoreEl = document.getElementById('score');
 const attentionText = document.getElementById('attention-text');
 const atencionBar = document.getElementById('atencion-bar');
 const pantalla = document.getElementById('pantalla-info');
+const powerupNotice = document.getElementById('powerup-notice');
 
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 
 let score = 0, atencion = 100, gameRunning = false, items = [], timeInterval;
-let player = { x: canvas.width / 2, y: canvas.height - 130, baseSize: 50, size: 50 };
+let invincible = false, invincibleTimer = null;
+let player = { x: canvas.width / 2, y: canvas.height / 2, size: 40 };
 
-// Tarjetas estilizadas de móviles con las marcas de redes sociales
+// Marcas de RRSS como comecocos/fantasmas
 const rrssMobiles = [
-    { name: 'TikTok', bg: '#fe2c55', textCol: '#ffffff' },
-    { name: 'Insta', bg: '#e1306c', textCol: '#ffffff' },
-    { name: 'YouTube', bg: '#ff0000', textCol: '#ffffff' },
-    { name: 'X / Twitter', bg: '#1da1f2', textCol: '#ffffff' },
-    { name: 'Twitch', bg: '#9146ff', textCol: '#ffffff' },
-    { name: 'Snap', bg: '#fffc00', textCol: '#000000' }
+    { name: 'TikTok', bg: '#fe2c55' },
+    { name: 'Insta', bg: '#e1306c' },
+    { name: 'YouTube', bg: '#ff0000' },
+    { name: 'X', bg: '#00d2ff' },
+    { name: 'Twitch', bg: '#9146ff' }
 ];
 
-const vidaReal = ['📚', '🎨', '⚽', '😴', '🎸', '🌱'];
+// Solo Descanso, Naturaleza, Deporte y Libro para recargar poder
+const vidaReal = ['😴', '🌿', '⚽', '📚'];
 
-// MOTOR DE SONIDO RETRO
+// Sonidos Retro
 const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-
-function playSound(frequency, duration, type = 'square', volume = 0.1) {
+function playSound(freq, duration, type = 'square', vol = 0.1) {
     if (audioCtx.state === 'suspended') audioCtx.resume();
-    const oscillator = audioCtx.createOscillator();
-    const gainNode = audioCtx.createGain();
-    oscillator.type = type;
-    oscillator.frequency.setValueAtTime(frequency, audioCtx.currentTime);
-    gainNode.gain.setValueAtTime(volume, audioCtx.currentTime);
-    gainNode.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + duration);
-    oscillator.connect(gainNode);
-    gainNode.connect(audioCtx.destination);
-    oscillator.start();
-    oscillator.stop(audioCtx.currentTime + duration);
+    const osc = audioCtx.createOscillator();
+    const gain = audioCtx.createGain();
+    osc.type = type;
+    osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
+    gain.gain.setValueAtTime(vol, audioCtx.currentTime);
+    gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + duration);
+    osc.connect(gain);
+    gain.connect(audioCtx.destination);
+    osc.start();
+    osc.stop(audioCtx.currentTime + duration);
 }
 
-function soundIntro() {
-    playSound(300, 0.1, 'square', 0.1);
-    setTimeout(() => playSound(500, 0.1, 'square', 0.1), 100);
-    setTimeout(() => playSound(700, 0.3, 'square', 0.1), 200);
-}
-
-function soundScore() { playSound(900, 0.08, 'square', 0.08); } 
-function soundDamage() { 
-    playSound(150, 0.1, 'sawtooth', 0.2); 
-    setTimeout(() => playSound(100, 0.2, 'sawtooth', 0.2), 80);
-} 
-function soundGameOver() {
-    playSound(250, 0.2, 'square', 0.15);
-    setTimeout(() => playSound(180, 0.2, 'square', 0.15), 200);
-    setTimeout(() => playSound(90, 0.5, 'triangle', 0.2), 400);
-}
-
-// Controles táctiles y ratón
-window.addEventListener('mousemove', (e) => { player.x = e.clientX - player.size/2; });
+// Controles (Ratón / Táctil)
+window.addEventListener('mousemove', (e) => { 
+    player.x = e.clientX; 
+    player.y = e.clientY; 
+});
 window.addEventListener('touchmove', (e) => { 
-    player.x = e.touches[0].clientX - player.size/2;
+    player.x = e.touches[0].clientX;
+    player.y = e.touches[0].clientY;
     e.preventDefault();
 }, {passive: false});
 
 function iniciarJuegoCompleto() {
     if (audioCtx.state === 'suspended') audioCtx.resume();
-    soundIntro();
-    setTimeout(startGame, 400);
+    playSound(400, 0.1); setTimeout(() => playSound(600, 0.2), 100);
+    setTimeout(startGame, 300);
 }
 
 function startGame() {
-    score = 0; atencion = 100; items = [];
+    score = 0; atencion = 100; items = []; invincibilityEnd();
     actualizarUI();
     gameRunning = true;
     pantalla.style.display = 'none';
@@ -167,120 +171,164 @@ function actualizarUI() {
     attentionText.innerText = Math.round(atencion) + "%";
     atencionBar.style.width = atencion + "%";
 
-    // Hinchazón progresiva del cerebro al perder atención
-    let hinchazon = (100 - atencion) * 0.95; 
-    player.size = player.baseSize + hinchazon;
+    if(atencion > 60) attentionText.style.color = "var(--verde)";
+    else if(atencion > 30) attentionText.style.color = "var(--amarillo)";
+    else attentionText.style.color = "var(--rojo)";
+}
 
-    if(atencion > 60) {
-        attentionText.style.color = "var(--verde)";
-    } else if(atencion > 30) {
-        attentionText.style.color = "var(--amarillo)";
-    } else {
-        attentionText.style.color = "var(--rojo)";
-    }
+function activatePowerUp() {
+    invincible = true;
+    powerupNotice.style.display = 'block';
+    playSound(800, 0.3, 'triangle', 0.2);
+    
+    clearTimeout(invincibleTimer);
+    invincibleTimer = setTimeout(invincibilityEnd, 6000);
+}
+
+function invincibilityEnd() {
+    invincible = false;
+    powerupNotice.style.display = 'none';
 }
 
 function spawnItem() {
-    const isBad = Math.random() > 0.35;
-    let data;
+    const isBad = Math.random() > 0.3;
+    const edge = Math.floor(Math.random() * 4);
+    let x, y;
+
+    if (edge === 0) { x = Math.random() * canvas.width; y = -40; }
+    else if (edge === 1) { x = canvas.width + 40; y = Math.random() * canvas.height; }
+    else if (edge === 2) { x = Math.random() * canvas.width; y = canvas.height + 40; }
+    else { x = -40; y = Math.random() * canvas.height; }
 
     if (isBad) {
-        data = rrssMobiles[Math.floor(Math.random() * rrssMobiles.length)];
+        const data = rrssMobiles[Math.floor(Math.random() * rrssMobiles.length)];
         items.push({
-            x: Math.random() * (canvas.width - 110),
-            y: -70,
-            w: 100,
-            h: 55,
-            speed: 4 + (score / 15),
+            x, y,
+            speed: 2 + Math.random() * 2 + (score / 20),
             name: data.name,
             bg: data.bg,
-            textCol: data.textCol,
-            isBad: true
+            isBad: true,
+            size: 35
         });
     } else {
         items.push({
-            x: Math.random() * (canvas.width - 50),
-            y: -50,
-            w: 45,
-            h: 45,
-            speed: 4 + (score / 15),
+            x, y,
+            speed: 1.5 + Math.random(),
             emoji: vidaReal[Math.floor(Math.random() * vidaReal.length)],
-            isBad: false
+            isBad: false,
+            size: 30
         });
     }
+}
+
+function drawGhost(x, y, size, color, name, isScared) {
+    ctx.save();
+    ctx.translate(x, y);
+
+    const fillColor = isScared ? '#0000ff' : color;
+    ctx.fillStyle = fillColor;
+
+    ctx.beginPath();
+    ctx.arc(0, -size/4, size/2, Math.PI, 0, false);
+    ctx.lineTo(size/2, size/2);
+    ctx.lineTo(size/4, size/3);
+    ctx.lineTo(0, size/2);
+    ctx.lineTo(-size/4, size/3);
+    ctx.lineTo(-size/2, size/2);
+    ctx.closePath();
+    ctx.fill();
+
+    ctx.fillStyle = '#fff';
+    ctx.beginPath();
+    ctx.arc(-size/5, -size/4, size/6, 0, Math.PI * 2);
+    ctx.arc(size/5, -size/4, size/6, 0, Math.PI * 2);
+    ctx.fill();
+
+    ctx.fillStyle = isScared ? '#ff0000' : '#000';
+    ctx.beginPath();
+    ctx.arc(-size/5, -size/4, size/12, 0, Math.PI * 2);
+    ctx.arc(size/5, -size/4, size/12, 0, Math.PI * 2);
+    ctx.fill();
+
+    if (!isScared) {
+        ctx.fillStyle = '#fff';
+        ctx.font = '900 10px Orbitron';
+        ctx.textAlign = 'center';
+        ctx.fillText(name, 0, -size/1.2);
+    }
+
+    ctx.restore();
 }
 
 function animate() {
     if (!gameRunning) return;
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-    // Dibujar Jugador (Cerebro)
+    ctx.save();
+    if (invincible) {
+        ctx.shadowBlur = 25;
+        ctx.shadowColor = "var(--amarillo)";
+    }
     ctx.font = `${player.size}px Arial`;
-    ctx.fillText('🧠', player.x, player.y + player.size/2);
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+    ctx.fillText('🧠', player.x, player.y);
+    ctx.restore();
 
-    if (Math.random() < 0.08) spawnItem();
+    if (Math.random() < 0.05) spawnItem();
 
     items.forEach((item, index) => {
-        item.y += item.speed;
+        const angle = Math.atan2(player.y - item.y, player.x - item.x);
+        item.x += Math.cos(angle) * item.speed;
+        item.y += Math.sin(angle) * item.speed;
 
         if (item.isBad) {
-            // Dibujar móvil retro con la marca de la red social
-            ctx.fillStyle = "#ffffff";
-            ctx.beginPath();
-            ctx.roundRect(item.x - 3, item.y - 3, item.w + 6, item.h + 6, 10);
-            ctx.fill();
-
-            ctx.fillStyle = item.bg;
-            ctx.beginPath();
-            ctx.roundRect(item.x, item.y, item.w, item.h, 8);
-            ctx.fill();
-
-            ctx.fillStyle = item.textCol;
-            ctx.font = '900 13px Orbitron, sans-serif';
-            ctx.textAlign = 'center';
-            ctx.fillText(item.name, item.x + item.w / 2, item.y + item.h / 2 + 5);
-            ctx.textAlign = 'left'; // Reset alignment
+            drawGhost(item.x, item.y, item.size * 1.3, item.bg, item.name, invincible);
         } else {
-            // Dibujar icono de Vida Real
-            ctx.font = '45px Arial';
-            ctx.fillText(item.emoji, item.x, item.y + 40);
+            ctx.font = '35px Arial';
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'middle';
+            ctx.fillText(item.emoji, item.x, item.y);
         }
 
-        // Colisión precisa con el cerebro
-        if (item.y + item.h > player.y && item.y < player.y + player.size &&
-            item.x + item.w > player.x && item.x < player.x + player.size) {
-            
+        const dx = player.x - item.x;
+        const dy = player.y - item.y;
+        const dist = Math.sqrt(dx * dx + dy * dy);
+
+        if (dist < player.size / 2 + item.size / 2) {
             if (item.isBad) {
-                atencion -= 25;
-                soundDamage();
-                ctx.fillStyle = "rgba(255, 0, 0, 0.35)";
-                ctx.fillRect(0, 0, canvas.width, canvas.height);
+                if (invincible) {
+                    atencion += 15;
+                    playSound(1000, 0.1, 'square', 0.2);
+                    items.splice(index, 1);
+                } else {
+                    atencion -= 20;
+                    playSound(150, 0.15, 'sawtooth', 0.2);
+                    items.splice(index, 1);
+                }
             } else {
+                activatePowerUp();
                 atencion += 10;
-                soundScore();
+                items.splice(index, 1);
             }
-            
             actualizarUI();
-            items.splice(index, 1);
         }
-
-        if (item.y > canvas.height) items.splice(index, 1);
     });
 
     if (atencion <= 0) {
         gameRunning = false;
         clearInterval(timeInterval);
-        soundGameOver();
+        playSound(100, 0.4, 'sawtooth', 0.2);
         
         pantalla.style.display = 'block';
-        document.getElementById('titulo').innerText = "💥 ¡CEREBRO EXPLOTADO!";
+        document.getElementById('titulo').innerText = "👾 ¡SOBRECARGA DIGITAL!";
         document.getElementById('titulo').style.color = "var(--rojo)";
         document.getElementById('descripcion').innerHTML = `
-            Las redes han hinchado tu mente hasta colapsar.<br><br>
-            Aguantaste enfocado/a: <b style="color:var(--amarillo);">${score} segundos</b>
+            Las redes sociales devoraron toda tu atención.<br><br>
+            Aguantaste concentrado/a: <b style="color:var(--amarillo);">${score} segundos</b>
         `;
-        const btn = document.querySelector('button');
-        btn.innerText = "DESINFLAR Y REINTENTAR";
+        const btn = document.querySelector('#pantalla-info button');
+        btn.innerText = "REINTENTAR";
         btn.setAttribute('onclick', 'startGame()');
     } else {
         requestAnimationFrame(animate);
