@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Esclavos del Algoritmo | ojo al clic</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@900&family=Open+Sans:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root { 
+            --fondo: #050a14; 
+            --cian: #00ffff; 
+            --fucsia: #ff00ff; 
+            --amarillo: #fbff00; 
+            --blanco: #ffffff; 
+            --rojo: #ff3e3e;
+            --verde: #00ff66;
+        }
+        
+        body { 
+            background-color: var(--fondo); 
+            color: var(--blanco); 
+            font-family: 'Open Sans', sans-serif; 
+            margin: 0; 
+            padding: 0; 
+            line-height: 1.8; 
+        }
+
+        .container { 
+            max-width: 850px; 
+            margin: 0 auto; 
+            padding: 60px 20px; 
+        } 
+        
+        h1 { 
+            font-family: 'Montserrat'; 
+            font-size: clamp(2rem, 5vw, 3.5rem); 
+            color: var(--cian); 
+            text-shadow: 4px 4px var(--fucsia); 
+            text-transform: uppercase; 
+            text-align: center; 
+            line-height: 1.1; 
+            margin-bottom: 40px; 
+        }
+
+        h2 { 
+            color: var(--fucsia); 
+            border-left: 5px solid var(--cian); 
+            padding-left: 15px; 
+            margin-top: 50px; 
+            font-family: 'Montserrat'; 
+            text-transform: uppercase; 
+        }
+
+        .destacado { 
+            background: rgba(0, 255, 255, 0.1); 
+            border: 1px solid var(--cian); 
+            padding: 20px; 
+            border-radius: 10px; 
+            font-size: 1.1rem; 
+            margin-bottom: 30px; 
+        }
+
+        .alerta-box {
+            background: rgba(255, 62, 62, 0.15);
+            border: 2px solid var(--rojo);
+            padding: 20px;
+            border-radius: 10px;
+            margin: 30px 0;
+        }
+
+        .separador { 
+            height: 4px; 
+            background: linear-gradient(to right, transparent, var(--fucsia), var(--cian), transparent); 
+            margin: 50px 0; 
+        }
+
+        b { color: var(--cian); }
+        .warning { color: var(--amarillo); font-weight: bold; }
+
+        /* INTERACTIVO: MEDIDOR DE MENTAL */
+        #contenedor-multimedia {
+            background: #111;
+            border: 3px solid var(--fucsia);
+            border-radius: 20px;
+            padding: 30px;
+            text-align: center;
+            margin-top: 50px;
+            box-shadow: 0 0 20px rgba(255, 0, 255, 0.2);
+        }
+
+        .pantalla-fake {
+            background: #000;
+            width: 100%;
+            min-height: 160px;
+            margin-bottom: 20px;
+            border-radius: 10px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            border: 2px solid #333;
+            padding: 15px;
+            box-sizing: border-box;
+        }
+
+        .medidor-barra {
+            width: 100%;
+            height: 25px;
+            background: #222;
+            border-radius: 15px;
+            overflow: hidden;
+            border: 1px solid var(--cian);
+            margin: 15px 0;
+        }
+
+        #progreso-dopamina {
+            width: 10%;
+            height: 100%;
+            background: linear-gradient(90deg, var(--verde), var(--amarillo), var(--rojo));
+            transition: width 0.5s ease;
+        }
+
+        .btn-accion {
+            background: var(--cian);
+            color: #000;
+            border: none;
+            padding: 12px 20px;
+            font-family: 'Montserrat';
+            font-weight: 900;
+            cursor: pointer;
+            border-radius: 5px;
+            margin: 5px;
+            transition: 0.3s;
+        }
+
+        .btn-accion:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 10px var(--cian);
+        }
+
+        .btn-rojo { background: var(--rojo); color: #fff; }
+
+        .quote {
+            background: rgba(251, 255, 0, 0.05);
+            border-left: 4px solid var(--amarillo);
+            padding: 15px;
+            margin-top: 40px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <a href="../index.html" class="back-btn" style="color: var(--cian); text-decoration: none; border: 1px solid var(--cian); padding: 5px 15px; border-radius: 5px; font-family: 'Montserrat';">← VOLVER</a>
+        
+        <h1>🧠 ESCLAVOS DEL ALGORITMO: <br>¿USAS LA RED O TE USA ELLA? 🎰</h1>
+        
+        <div class="destacado">
+            Si no pagas por el producto, <b>tú eres el producto</b>. Las redes sociales no se diseñaron para conectarte con el mundo, sino para secuestrar tu atención durante el mayor tiempo posible. ¿Por qué es tan difícil soltar el móvil?
+        </div>
+
+        <h2>🔬 1. LA TRAMPA DE LA DOPAMINA CEREBRAL</h2>
+        <p>Cada vez que ves una notificación, un <i>like</i> o un nuevo vídeo en tu feed, tu cerebro libera <b>dopamina</b>, la hormona del placer inmediato:</p>
+        
+        <p>🎰 <b>El efecto Tragaperras:</b> Las redes usan la llamada "recompensa variable". No sabes si el siguiente vídeo será buenísimo o aburrido, así que sigues haciendo deslizar (scroll) exactamente como alguien que tira de la palanca de una máquina en un casino.</p>
+        
+        <p>♾️ <b>El Scroll Infinito:</b> Diseñado para eliminar los puntos de parada. Antes, leías una página y la girabas; ahora el contenido nunca termina, impidiendo que tu cerebro reflexione si es hora de parar.</p>
+
+        <div class="separador"></div>
+
+        <h2>🚨 2. LOS RIESGOS INVISIBLES DE LA HIPERCONEXIÓN</h2>
+        <p>El uso incontrolado de la pantalla no es solo perder tiempo, deja secuelas reales en tu día a día:</p>
+
+        <p>👁️‍🗨️ <b>FOMO (Fear Of Missing Out):</b> La ansiedad de sentir que te estás perdiendo algo importante si no miras el móvil cada cinco minutos.</p>
+
+        <p>📉 <b>Afectación del Aprendizaje y Concentración:</b> Al acostumbrarte a vídeos de 15 segundos, tu capacidad de prestar atención a lecturas, estudios o conversaciones largas cae drásticamente.</p>
+        
+        <p>😴 <b>El Bucle del Sueño Falso:</b> La luz azul de la pantalla engaña al cerebro haciéndole creer que es de día, destruyendo tu ciclo de sueño y tu rendimiento al día siguiente.</p>
+
+        <div class="alerta-box">
+            <h3 style="margin-top:0; color: var(--rojo);">⚠️ LAVIDA INTERNET VS. VIDA REAL</h3>
+            <p>Aparece el sesgo de la <b>comparación constante</b>. En redes solo ves el 1% mejor de la vida de los demás (viajes, ropa, momentos perfectos). Comparar tu vida cotidiana con el escaparate preparado de otros genera frustración e inseguridad absurda.</p>
+        </div>
+
+        <h2>🛡️ 3. RECLAMA EL CONTROL DE TU TIEMPO</h2>
+        <p>No se trata de borrar tus cuentas y vivir en una cueva, sino de pasar de ser un consumidor pasivo a tomar las riendas:</p>
+
+        <p>🔔 <b>Desactiva notificaciones innecesarias:</b> Decide tú cuándo entras a la aplicación, no dejes que una vibración controle tu atención.</p>
+        
+        <p>⏱️ <b>Establece límites de tiempo:</b> Utiliza los medidores del sistema operativo para bloquear apps tras cierto uso diario.</p>
+
+        <p>🚫 <b>Crea zonas libres de pantallas:</b> Nada de móviles en la mesa durante las comidas ni al irte a la cama.</p>
+
+        <div id="contenedor-multimedia">
+            <h3 style="color: var(--fucsia); margin-top: 0;">🧪 SIMULADOR DE SOBRECARGA SENSORIAL</h3>
+            <p style="font-size:0.85rem; color:#aaa;">Comprueba cómo reacciona tu cerebro al Scroll Compulsivo</p>
+            
+            <div class="pantalla-fake">
+                <div class="medidor-barra">
+                    <div id="progreso-dopamina"></div>
+                </div>
+                <p id="txt-estado" style="color: var(--verde); font-family: 'Courier New'; font-size: 0.85rem; margin: 0;">ESTADO CEREBRAL: Relajado y Enfocado</p>
+            </div>
+
+            <button class="btn-accion" onclick="hacerScroll()">📲 HACER SCROLL INFINITO</button>
+            <button class="btn-accion btn-rojo" onclick="desconectar()">🔌 DESCONECTAR Y DESCANSAR</button>
+            
+            <p id="txt-info-adiccion" style="margin-top: 15px; font-family: 'Courier New'; color: var(--blanco); font-size: 0.75rem;">Nivel de dopamina: 10% | Atención: 100%</p>
+        </div>
+
+        <div class="quote">
+            <b>💡 EL CONSEJO "ojo al clic" 👁️🖱️</b><br>
+            El tiempo es el único recurso que no recuperas jamás. Si pasas 4 horas al día en redes sociales, estarás regalando <span class="warning">60 días enteros de cada año</span> a empresas multimillonarias. ¡Tú decides en qué inviertes tu vida!
+        </div>
+
+        <p style="text-align: center; margin-top: 60px;">
+            <a href="../index.html" class="back-btn" style="color: var(--fucsia); text-decoration: none; border: 1px solid var(--fucsia); padding: 10px 20px; border-radius: 5px; font-family: 'Montserrat'; font-weight: bold;">VOLVER A LA PORTADA</a>
+        </p>
+    </div>
+
+    <script>
+        let nivel = 10;
+        
+        function hacerScroll() {
+            const barra = document.getElementById('progreso-dopamina');
+            const estado = document.getElementById('txt-estado');
+            const info = document.getElementById('txt-info-adiccion');
+            
+            if(nivel < 100) {
+                nivel += 20;
+                barra.style.width = nivel + "%";
+            }
+
+            if(nivel >= 30 && nivel < 70) {
+                estado.innerText = "ESTADO CEREBRAL: Búsqueda activa de estímulos";
+                estado.style.color = "var(--amarillo)";
+                info.innerText = `Nivel de dopamina: ${nivel}% | Atención reducida al 60%`;
+            } else if(nivel >= 70) {
+                estado.innerText = "🚨 ALERTA: Sobrecarga Digital / Ansiedad FOMO";
+                estado.style.color = "var(--rojo)";
+                info.innerText = `Nivel de dopamina: ${nivel}% | Fatiga mental crítica. Capacidad de atención: 15%`;
+            }
+        }
+
+        function desconectar() {
+            nivel = 10;
+            const barra = document.getElementById('progreso-dopamina');
+            const estado = document.getElementById('txt-estado');
+            const info = document.getElementById('txt-info-adiccion');
+            
+            barra.style.width = "10%";
+            estado.innerText = "ESTADO CEREBRAL: Relajado y Enfocado";
+            estado.style.color = "var(--verde)";
+            info.innerText = "Nivel de dopamina: 10% | Atención: 100%";
+        }
+    </script>
+</body>
+</html>
