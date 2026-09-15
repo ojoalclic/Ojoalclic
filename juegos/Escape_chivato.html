@@ -2,6 +2,7 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Escape del Chivato | ojo al clic</title>
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;900&display=swap" rel="stylesheet">
     <style>
@@ -19,6 +20,7 @@
             text-align: center; 
             margin: 0; 
             overflow: hidden; 
+            touch-action: none;
         }
 
         #game-container {
@@ -38,6 +40,7 @@
             max-width: 90%;
             max-height: 70vh;
             cursor: none;
+            touch-action: none;
         }
 
         .stats {
@@ -46,20 +49,29 @@
             color: var(--amarillo);
         }
 
-        .back-btn {
-            margin-top: 20px;
-            color: var(--fucsia);
+        .salir-btn {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            color: var(--cian);
             text-decoration: none;
-            border: 1px solid var(--fucsia);
-            padding: 10px 20px;
+            font-size: 0.8rem;
+            border: 1px solid var(--cian);
+            padding: 8px 15px;
+            z-index: 50;
+            background: rgba(5, 10, 20, 0.8);
+            border-radius: 3px;
             transition: 0.3s;
         }
 
-        .back-btn:hover { background: var(--fucsia); color: white; }
+        .salir-btn:hover {
+            background: var(--cian);
+            color: #000;
+        }
 
         #overlay {
             position: absolute;
-            background: rgba(5, 10, 20, 0.9);
+            background: rgba(5, 10, 20, 0.95);
             width: 100%;
             height: 100%;
             display: flex;
@@ -71,12 +83,21 @@
 
         button {
             background: var(--cian);
+            color: #000;
             border: none;
             padding: 15px 30px;
             font-family: 'Orbitron';
             font-weight: 900;
             cursor: pointer;
             border-radius: 5px;
+            font-size: 1.1rem;
+            box-shadow: 0 4px 0 #008b8b;
+            margin-top: 15px;
+        }
+
+        button:active {
+            transform: translateY(3px);
+            box-shadow: none;
         }
     </style>
 </head>
@@ -86,14 +107,14 @@
     <div id="overlay">
         <h1>📱 ESCAPE DEL CHIVATO</h1>
         <p>Eres un "LIKE" privado. ¡No dejes que los ojos espía te rastreen!</p>
-        <p style="color: var(--amarillo); font-size: 0.8rem;">Mueve el ratón para esquivar. ¡Aguanta 30 segundos!</p>
+        <p style="color: var(--amarillo); font-size: 0.85rem;">Mueve el ratón o desliza el dedo para esquivar.</p>
         <button onclick="startGame()">INICIAR MISIÓN</button>
     </div>
 
     <div class="stats">TIEMPO: <span id="timer">0</span>s | NIVEL: <span id="level">1</span></div>
     <canvas id="gameCanvas" width="600" height="400"></canvas>
     
-    <a href="../recreativo.html" class="back-btn">← SALIR AL RECREATIVO</a>
+    <a href="../recreativo.html" class="salir-btn">SALIR AL RECREATIVO</a>
 </div>
 
 <script>
@@ -110,12 +131,30 @@
     let enemies = [];
     let startTime;
 
-    // Seguir el ratón
+    // Control por ratón
     canvas.addEventListener('mousemove', (e) => {
         const rect = canvas.getBoundingClientRect();
         player.x = e.clientX - rect.left;
         player.y = e.clientY - rect.top;
     });
+
+    // Control táctil para móviles
+    function updateTouchPosition(e) {
+        if (e.touches.length > 0) {
+            const rect = canvas.getBoundingClientRect();
+            player.x = e.touches[0].clientX - rect.left;
+            player.y = e.touches[0].clientY - rect.top;
+        }
+    }
+
+    canvas.addEventListener('touchmove', (e) => {
+        updateTouchPosition(e);
+        e.preventDefault();
+    }, { passive: false });
+
+    canvas.addEventListener('touchstart', (e) => {
+        updateTouchPosition(e);
+    }, { passive: false });
 
     function createEnemy() {
         return {
@@ -131,6 +170,8 @@
         gameActive = true;
         score = 0;
         level = 1;
+        timerDisplay.innerText = "0";
+        levelDisplay.innerText = "1";
         enemies = [createEnemy(), createEnemy(), createEnemy()];
         startTime = Date.now();
         overlay.style.display = 'none';
@@ -143,8 +184,8 @@
         overlay.innerHTML = `
             <h1 style="color:var(--fucsia)">¡PILLADO! 👁️</h1>
             <p>Un rastreador ha copiado tus datos.</p>
-            <p>Aguantaste: ${score} segundos</p>
-            <button onclick="location.reload()">REINTENTAR</button>
+            <p>Aguantaste: <b style="color:var(--amarillo)">${score} segundos</b></p>
+            <button onclick="startGame()">REINTENTAR</button>
         `;
     }
 
