@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Los Dinosaurios de la Red | ojo al clic</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@900&family=Open+Sans:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root { 
+            --fondo: #050a14; 
+            --cian: #00ffff; 
+            --fucsia: #ff00ff; 
+            --amarillo: #fbff00; 
+            --blanco: #ffffff; 
+            --rojo: #ff3e3e;
+            --verde: #00ff66;
+        }
+        
+        body { 
+            background-color: var(--fondo); 
+            color: var(--blanco); 
+            font-family: 'Open Sans', sans-serif; 
+            margin: 0; 
+            padding: 0; 
+            line-height: 1.8; 
+        }
+
+        .container { 
+            max-width: 850px; 
+            margin: 0 auto; 
+            padding: 60px 20px; 
+        }
+        
+        h1 { 
+            font-family: 'Montserrat'; 
+            font-size: clamp(2rem, 5vw, 3.5rem); 
+            color: var(--cian); 
+            text-shadow: 4px 4px var(--fucsia); 
+            text-transform: uppercase; 
+            text-align: center; 
+            line-height: 1.1; 
+            margin-bottom: 40px; 
+        }
+
+        h2 { 
+            color: var(--fucsia); 
+            border-left: 5px solid var(--cian); 
+            padding-left: 15px; 
+            margin-top: 50px; 
+            font-family: 'Montserrat'; 
+            text-transform: uppercase; 
+        }
+
+        .destacado { 
+            background: rgba(0, 255, 255, 0.1); 
+            border: 1px solid var(--cian); 
+            padding: 20px; 
+            border-radius: 10px; 
+            font-size: 1.1rem; 
+            margin-bottom: 30px; 
+        }
+
+        .alerta-box {
+            background: rgba(255, 0, 255, 0.15);
+            border: 2px solid var(--fucsia);
+            padding: 20px;
+            border-radius: 10px;
+            margin: 30px 0;
+        }
+
+        .separador { 
+            height: 4px; 
+            background: linear-gradient(to right, transparent, var(--fucsia), var(--cian), transparent); 
+            margin: 50px 0; 
+        }
+
+        b { color: var(--cian); }
+        .warning { color: var(--amarillo); font-weight: bold; }
+
+        /* SIMULADOR RETRO SOCIAL */
+        #contenedor-multimedia {
+            background: #111;
+            border: 3px solid var(--cian);
+            border-radius: 20px;
+            padding: 30px;
+            text-align: center;
+            margin-top: 50px;
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.2);
+        }
+
+        .pantalla-fake {
+            background: #000;
+            width: 100%;
+            min-height: 160px;
+            margin-bottom: 20px;
+            border-radius: 10px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            border: 2px solid #333;
+            padding: 15px;
+            box-sizing: border-box;
+        }
+
+        #retro-status {
+            font-family: 'Courier New', monospace;
+            color: var(--amarillo);
+            font-size: 1.1rem;
+            margin-top: 10px;
+        }
+
+        .btn-accion {
+            background: var(--fucsia);
+            color: #fff;
+            border: none;
+            padding: 12px 20px;
+            font-family: 'Montserrat';
+            font-weight: 900;
+            cursor: pointer;
+            border-radius: 5px;
+            margin: 5px;
+            transition: 0.3s;
+        }
+
+        .btn-accion:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 10px var(--fucsia);
+        }
+
+        .btn-cian { background: var(--cian); color: #000; }
+
+        .quote {
+            background: rgba(251, 255, 0, 0.05);
+            border-left: 4px solid var(--amarillo);
+            padding: 15px;
+            margin-top: 40px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <a href="../index.html" class="back-btn" style="color: var(--cian); text-decoration: none; border: 1px solid var(--cian); padding: 5px 15px; border-radius: 5px; font-family: 'Montserrat';">← VOLVER</a>
+        
+        <h1>🦕 LOS DINOSAURIOS DE LA RED: <br>DONDE EMPEZÓ TODO 🌐</h1>
+        
+        <div class="destacado">
+            ¿Piensas que TikTok e Instagram lo inventaron todo? <b>¡ERROR!</b> ❌ Antes de los algoritmos y los "Reels", existió una era donde enviar un zumbido, personalizar tu perfil con código HTML o firmar un "metroflog" era la cúspide de la vida social.
+        </div>
+
+        <h2>🦖 1. SIXDEGREES Y LOS PRIMEROS PASOS (1997)</h2>
+        <p>Mucho antes de Facebook, nació <b>SixDegrees</b>, considerada por muchos la primera red social moderna:</p>
+        
+        <p>🌐 <b>La teoría de los 6 grados:</b> Se basaba en la idea de que cualquier persona del planeta está conectada a otra a través de máximo cinco intermediarios. Por primera vez, podías crear un perfil y listar a tus amigos reales.</p>
+        
+        <p>⏳ <b>Adelantada a su tiempo:</b> En 1997 la gente apenas tenía internet en casa y la idea de hacer "amigos virtuales" sonaba a ciencia ficción. Cerró en 2001, pero dejó la semilla sembrada.</p>
+
+        <div class="separador"></div>
+
+        <h2>👾 2. LA ERA DE LOS ZUMBIDOS Y EL PUSH-TO-TALK</h2>
+        <p>A principios de los 2000, el mundo adolescente cambió para siempre gracias a plataformas legendarias:</p>
+
+        <p>💬 <b>MSN Messenger:</b> El rey indiscutible de las tardes. Si querías llamar la atención de tu <i>crush</i>, te desconectabas y conectabas mil veces, cambiabas tu nick con letras extrañas <code>(¯`•._.• [TuNombre] •._.•´¯)</code> o enviabas un <b>zumbido</b> que hacía temblar la pantalla entera.</p>
+        
+        <p>📸 <b>Fotolog y Metroflog:</b> La prehistoria de Instagram. Solo podías subir una foto al día y tus amigos te dejaban firmas en el "libro de visitas". Nació el fenómeno <i>flogger</i> y las selfies en el espejo con cámara digital.</p>
+
+        <div class="alerta-box">
+            <h3 style="margin-top:0; color: var(--fucsia);">🎨 MYSPACE Y TUENTI: LAEDAD DE ORO TUENTI Y EL CÓDIGO HTML</h3>
+            <p>En <b>MySpace</b> aprendimos programación web básica por accidente solo para ponerle música de fondo y luces de neón a nuestro perfil. En España, <b>Tuenti</b> dominó una era entera con sus invitaciones privadas y sus célebres eventos masivos.</p>
+        </div>
+
+        <h2>📉 3. ¿POR QUÉ DESAPARECIERON?</h2>
+        <p>Ningún imperio dura para siempre. Los dinosaurios digitales cayeron por varios motivos clave:</p>
+
+        <p>📱 <b>La llegada del Smartphone:</b> Plataformas como Tuenti o MSN no supieron adaptarse rápido al auge del iPhone y Android.</p>
+        
+        <p>👥 <b>La llegada de Facebook:</b> Mark Zuckerberg creó un sistema más limpio, sin música estridente al entrar ni diseños caóticos, unificando a todo el mundo en una sola red.</p>
+
+        <div id="contenedor-multimedia">
+            <h3 style="color: var(--cian); margin-top: 0;">🕹️ MAQUINA DEL TIEMPO SOCIAL</h3>
+            
+            <div class="pantalla-fake">
+                <p id="retro-log" style="color: var(--verde); font-family: 'Courier New'; font-size: 0.8rem; margin: 0;">> Selecciona una era digital para conectar...</p>
+                <div id="retro-status">(Desconectado)</div>
+            </div>
+
+            <button class="btn-accion btn-cian" onclick="simularRed('msn')">🔔 ENVIAR ZUMBIDO MSN</button>
+            <button class="btn-accion" onclick="simularRed('fotolog')">📸 FIRMAR FOTOLOG</button>
+            <button class="btn-accion btn-cian" onclick="simularRed('myspace')">🎵 REPRODUCIR MYSPACE</button>
+            
+            <p id="txt-info" style="margin-top: 15px; font-family: 'Courier New'; color: var(--blanco); font-size: 0.75rem;">SISTEMA: Esperando comando...</p>
+        </div>
+
+        <div class="quote">
+            <b>💡 EL CONSEJO "ojo al clic" 👁️🖱️</b><br>
+            Las redes sociales cambian y desaparecen, pero las costumbres se mantienen. La próxima vez que uses TikTok, recuerda que la necesidad de expresarte y conectar <span class="warning">ya existía mucho antes de que nacieras</span>.
+        </div>
+
+        <p style="text-align: center; margin-top: 60px;">
+            <a href="../index.html" class="back-btn" style="color: var(--fucsia); text-decoration: none; border: 1px solid var(--fucsia); padding: 10px 20px; border-radius: 5px; font-family: 'Montserrat'; font-weight: bold;">VOLVER A LA PORTADA</a>
+        </p>
+    </div>
+
+    <script>
+        function simularRed(tipo) {
+            const log = document.getElementById('retro-log');
+            const status = document.getElementById('retro-status');
+            const info = document.getElementById('txt-info');
+            
+            if(tipo === 'msn') {
+                log.innerText = "> Enviando zumbido a todos tus contactos...";
+                status.innerText = "¡¡¡ ZUMBIDO RECIBIDO !!! 💥";
+                status.style.color = "var(--rojo)";
+                info.innerText = "Estado: (FDP) ~ Escuchando: Linkin Park - Numb.exe";
+            } else if(tipo === 'fotolog') {
+                log.innerText = "> Cargando foto de 1.2 megapíxeles...";
+                status.innerText = "✏️ 'ffs de oro k'm's effes'";
+                status.style.color = "var(--cian)";
+                info.innerText = "Has gastado tu única foto permitida de hoy (1/1).";
+            } else if(tipo === 'myspace') {
+                log.innerText = "> Ejecutando reproductor MIDI automático...";
+                status.innerText = "🎶 Reproduciendo: My Chemical Romance";
+                status.style.color = "var(--amarillo)";
+                info.innerText = "Advertencia: El fondo GIF animado está ralentizando tu PC.";
+            }
+        }
+    </script>
+</body>
+</html>
