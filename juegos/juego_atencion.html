@@ -175,12 +175,12 @@ function startGame() {
 function siguienteFase() {
     fase++;
     faseEl.innerText = fase;
-    atencion = Math.min(100, atencion + 25); // Recupera algo de atención al limpiar la pantalla
+    atencion = Math.min(100, atencion + 25);
     actualizarUI();
     playSound(600, 0.1, 'sine', 0.2); 
     setTimeout(() => playSound(900, 0.3, 'sine', 0.2), 100);
     
-    spawnGhosts(); // Reaparecen las redes para la nueva fase con más velocidad
+    spawnGhosts();
 }
 
 function actualizarUI() {
@@ -291,13 +291,25 @@ function animate() {
     }
 
     // Mover y procesar RRSS
-    const ghostSpeed = 1.5 + (fase * 0.5); // Incrementa la velocidad según la fase
+    const ghostSpeed = 1.5 + (fase * 0.5);
 
     for (let i = ghosts.length - 1; i >= 0; i--) {
         const ghost = ghosts[i];
-        const angle = Math.atan2(player.y - ghost.y, player.x - ghost.x);
+        
+        // Determinar ángulo: Perseguid
+        let angle = Math.atan2(player.y - ghost.y, player.x - ghost.x);
+        
+        if (invincible) {
+            // En modo Mente Clara, huyen en dirección contraria
+            angle += Math.PI;
+        }
+
         ghost.x += Math.cos(angle) * ghostSpeed;
         ghost.y += Math.sin(angle) * ghostSpeed;
+
+        // Limitar dentro del lienzo para que no escapen
+        ghost.x = Math.max(ghost.size / 2, Math.min(canvas.width - ghost.size / 2, ghost.x));
+        ghost.y = Math.max(ghost.size / 2, Math.min(canvas.height - ghost.size / 2, ghost.y));
 
         drawGhost(ghost, invincible);
 
@@ -308,18 +320,17 @@ function animate() {
 
         if (dist < player.size / 2 + ghost.size / 2) {
             if (invincible) {
-                // Comer red social: Se elimina de la pantalla
+                // Comer red social
                 atencion += 15;
                 playSound(1000, 0.1, 'square', 0.2);
                 ghosts.splice(i, 1);
                 
-                // Si eliminamos a todas, avanzamos de fase
                 if (ghosts.length === 0) {
                     siguienteFase();
                     break;
                 }
             } else {
-                // Te golpea: Pierdes atención y empuja a la red un poco
+                // Impacto
                 atencion -= 15;
                 playSound(150, 0.15, 'sawtooth', 0.2);
                 ghost.x -= Math.cos(angle) * 120;
